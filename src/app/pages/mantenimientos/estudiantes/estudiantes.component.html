@@ -1,0 +1,128 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Buscar usuario..."
+                        (keyup)="buscar(txtBusqueda.value)"
+                        #txtBusqueda/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form class="form p-t-20" 
+      [formGroup]="seleccionForm">
+
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="form-group row">
+            <div class="col-4">
+                <div class="input-group">
+                    <div class="input-group-addon">Jornada:</div>
+                    <select class="form-control" 
+                            formControlName="jornada">
+                        <option selected value="0">Seleccione la jornada...</option>
+                        <option value="1">MATUTINA</option>
+                        <option value="2">VESPERTINA</option>
+                        <option value="3">NOCTURNA</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <div class="input-group-addon">Nivel:</div>
+                    <select class="form-control" 
+                            formControlName="nivel"
+                            (change)="cargarCursos()">
+                        <option selected value="0">Seleccione el periodo...</option>
+                        <option value="1">EDUCACIÓN GENERAL BÁSICA</option>
+                        <option value="2">BACHILLERATO GENERAL UNIFICADO</option>
+                        <option value="3">BACHILLERATO TÉCNICO</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <div class="input-group-addon">Curso:</div>
+                    <select class="form-control" 
+                            formControlName="cursoSeleccionado"
+                            (change)="cargarEstudiantesPorCurso()">
+                        <option selected [value]="0">Seleccione el curso...</option>
+                        <option *ngFor="let curso of cursos"
+                                value="{{curso._id}}">
+                                {{curso.grado_abrev}} {{curso.nivel_abrev}} "{{curso.paralelo}}" {{curso.especialidad}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+
+<div class="row animated fadeIn fast"
+    *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Total de Usuarios ({{totalEstudiantes}})</h4>
+                        <h6 class="card-subtitle">Usuarios registrados en mi aplicación</h6>    
+                    </div>
+                 </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Cédula</th>
+                                <th>Apellidos</th>
+                                <th>Nombres</th>
+                                <th>Fecha de nacimiento</th>
+                                <th>Sexo</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let estudianteListado of estudiantesListado">
+                                <td>{{estudianteListado.estudiante.cedula}}</td>
+                                <td>{{estudianteListado.estudiante.apellidos}}</td>
+                                <td>{{estudianteListado.estudiante.nombres}}</td>
+                                <td>{{estudianteListado.estudiante.f_nac}}</td>
+                                <td>
+                                    <span *ngIf="estudianteListado.estudiante.sexo==0" class="label label-danger">Mujer</span>
+                                    <span *ngIf="estudianteListado.estudiante.sexo==1" class="label label-info">Hombre</span>
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Close"
+                                        class="cursor"> 
+                                        <i class="fa fa-close text-danger"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>              
+            </div>
+        </div>
+    </div>
+</div>

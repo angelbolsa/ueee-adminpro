@@ -13,6 +13,8 @@ import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { ComponentsModule } from '../components/components.module';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { TitulacionComponent } from './titulacion/titulacion.component';
+import { EstudiantesComponent } from './mantenimientos/estudiantes/estudiantes.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     PagesComponent,
     PerfilComponent,
     UsuariosComponent,
+    TitulacionComponent,
+    EstudiantesComponent
   ],
   exports: [
     DashboardComponent,

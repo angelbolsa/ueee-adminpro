@@ -114,6 +114,8 @@ export class UsuarioService {
             //hay que tener presente el orden en el que se traen los datos desde el modelo
             user => new Usuario(user.nombre, user.email, '', user.img, user.role, user.uid)
           );
+          console.log(url);
+
           return {
             total: resp.total,
             usuarios
