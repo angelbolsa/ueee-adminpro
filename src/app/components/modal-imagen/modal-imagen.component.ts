@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 
 export class ModalImagenComponent {
-  public imagenSubir: File;
+  public archivoSubir: File;
   public imgTemp: any = null;
 
   constructor( public modalImagenSvr: ModalImagenService,
@@ -24,7 +24,7 @@ export class ModalImagenComponent {
   }
 
   cambiarImagen( file: File ) {
-    this.imagenSubir = file;
+    this.archivoSubir = file;
 
     if ( !file ) { 
       return this.imgTemp = null;
@@ -37,18 +37,21 @@ export class ModalImagenComponent {
     }
   }
 
-  subirImagen() {
+  subirArchivo() {
 
     const tipo = this.modalImagenSvr.tipo;
     const id   = this.modalImagenSvr.id;
+
     this.fileUploadSrv
-      .actualizarFoto( this.imagenSubir, tipo, id)
+      .actualizarFoto( this.archivoSubir, tipo, id)
       .then( img => {
-        Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
+        Swal.fire('Guardado', 'Archivo cargado correctamente', 'success');
         this.modalImagenSvr.imagenCambio.emit(img);
         this.cerrarModal();
-      }).catch( err => {
+      })
+      .catch( err => {
         Swal.fire('Error', 'No se pudo subir la imagen', 'error');
       })
+
   }
 }

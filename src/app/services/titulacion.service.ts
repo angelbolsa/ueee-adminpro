@@ -8,15 +8,16 @@ import { Cliente } from '../models/cliente.model';
 import { Estudiante } from '../models/estudiante.model';
 
 import { CargarEstudiante } from '../interfaces/estudiante.interface';
-import { CargarEnrolamiento } from '../interfaces/enrolamiento.interface';
-import { Enrolamiento } from '../models/enrolamiento.model';
+
+import { CargarTitulacion } from '../interfaces/titulacion.interface';
+import { Titulacion } from '../models/titulacion.model';
 
 const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstudianteService {
+export class TitulacionService {
 
   constructor(private http: HttpClient) { }
   
@@ -35,7 +36,6 @@ export class EstudianteService {
   cargarEstudiantes(desde: number = 0, limite: number = 0)
   {
     const url = `${ base_url}/estudiantes?from=${desde}&limit=${limite}`;
-
     return this.http.get<CargarEstudiante>(url, this.headers )
       .pipe(
         map( resp => {
@@ -51,18 +51,18 @@ export class EstudianteService {
       )
   }
 
-  cargarEstudiantesPorCurso(curso: string, desde: number = 0, limite: number = 0){
-    const url = `${ base_url}/estudiantes/listado/${curso}?from=${desde}&limit=${limite}`;
-    return this.http.get<CargarEnrolamiento>(url, this.headers )
+  cargarTituladosPorCurso(periodo: string, curso: string, desde: number = 0, limite: number = 0){
+    const url = `${ base_url}/titulacion/estudiantes/${curso}?periodo=${periodo}&from=${desde}&limit=${limite}`;
+    return this.http.get<CargarTitulacion>(url, this.headers )
       .pipe(
         map( resp => {
-          const enrolamientos = resp.enrolamientos.map(
+          const titulados = resp.titulados.map(
             //hay que tener presente el orden en el que se traen los datos desde el modelo
-            enrolamiento => new Enrolamiento(enrolamiento.periodo, enrolamiento.estudiante, enrolamiento.curso, enrolamiento.usuario, enrolamiento.estado, enrolamiento._id)
+            titulado => new Titulacion(titulado.dataEstudiante, titulado.nota_grado, titulado.acta_public_id, titulado.acta_secure_url, titulado.titulo_public_id, titulado.titulo_secure_url, titulado.estado, titulado._id)
           );
           return {
             total: resp.total,
-            enrolamientos
+            titulados
           };
         })
       )

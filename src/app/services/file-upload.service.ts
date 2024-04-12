@@ -12,7 +12,7 @@ export class FileUploadService {
 
   async actualizarFoto(
     archivo: File,
-    tipo: 'usuarios'|'clientes'|'temas'|'subtemas',
+    tipo: 'usuarios'|'clientes'|'actas'|'titulos',
     id: string
   ) {
 
@@ -32,10 +32,13 @@ export class FileUploadService {
 
       const data = await resp.json();
 
+      console.log(data);
       if ( data.ok ) {
         //TENER CUIDADO CON EL NOMBRE DE LOS CAMPOS DEVUELTOS EN LA RESPUESTA DEL BACKEND
+        console.log('Okkkkkkkkkkk');
         return data.fileName;
       } else {
+        console.log('Errooooooooor');
         return false;
       }
       

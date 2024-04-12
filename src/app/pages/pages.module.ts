@@ -4,29 +4,34 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EstudianteComponent } from './mantenimientos/estudiantes/estudiante.component';
+import { ListadosComponent } from './gestion/listados.component';
 import { PagesComponent } from './pages.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { TitulacionComponent } from './gestion/titulacion.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
-import { SharedModule } from '../shared/shared.module';
-import { PipesModule } from '../pipes/pipes.module';
 import { ComponentsModule } from '../components/components.module';
-import { BusquedaComponent } from './busqueda/busqueda.component';
-import { TitulacionComponent } from './titulacion/titulacion.component';
-import { EstudiantesComponent } from './mantenimientos/estudiantes/estudiantes.component';
-
+import { PipesModule } from '../pipes/pipes.module';
+import { SharedModule } from '../shared/shared.module';
+import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
+import { CursosComponent } from './mantenimientos/cursos/cursos.component';
 
 @NgModule({
   declarations: [
     AccountSettingsComponent,
+    AsignacionComponent,
     BusquedaComponent,
+    CursosComponent,
     DashboardComponent,
+    EstudianteComponent,
+    ListadosComponent,
     PagesComponent,
     PerfilComponent,
-    UsuariosComponent,
     TitulacionComponent,
-    EstudiantesComponent
+    UsuariosComponent
   ],
   exports: [
     DashboardComponent,

@@ -1,4 +1,4 @@
-<div class="row animated fadeIn fast">
+<!-- <div class="row animated fadeIn fast">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -10,13 +10,14 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <form class="form p-t-20" 
       [formGroup]="seleccionForm">
 
 <div class="row animated fadeIn fast">
     <div class="col-12">
+        <h6 class="card-subtitle mb-2">Filtros de búsqueda:</h6>    
         <div class="form-group row">
             <div class="col-4">
                 <div class="input-group">
@@ -83,15 +84,26 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-8">
-                        <h4 class="card-title">Total de Usuarios ({{totalEstudiantes}})</h4>
-                        <h6 class="card-subtitle">Usuarios registrados en mi aplicación</h6>    
+                    <div class="col-12">
+                        <h5 class="card-title" *ngIf="cursoSeleccionado">Total de estudiantes en {{cursoSeleccionado}} ({{totalEstudiantes}})
+                        </h5>
+                        <h6 class="card-subtitle">Estudiantes registrados en el curso seleccionado</h6>    
                     </div>
+                    <!-- <div class="col mb-4">
+                        <div class="text-right">
+                            <a class="btn btn-primary"
+                             routerLink="/dashboard/estudiantes/nuevo">
+                                <i class="fa fa-user-o"></i>
+                                Registrar estudiante
+                            </a>
+                        </div>    
+                    </div> -->
                  </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered .full-color-table .full-purple-table .hover-tabl">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Cédula</th>
                                 <th>Apellidos</th>
                                 <th>Nombres</th>
@@ -101,7 +113,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let estudianteListado of estudiantesListado">
+                            <tr *ngFor="let estudianteListado of estudiantesListado; index as i">
+                                <td>{{i+1}}</td>
                                 <td>{{estudianteListado.estudiante.cedula}}</td>
                                 <td>{{estudianteListado.estudiante.apellidos}}</td>
                                 <td>{{estudianteListado.estudiante.nombres}}</td>
@@ -111,7 +124,7 @@
                                     <span *ngIf="estudianteListado.estudiante.sexo==1" class="label label-info">Hombre</span>
                                 </td>
                                 <td class="text-nowrap text-center">
-                                    <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                                    <a [routerLink]="['/dashboard/estudiantes', estudianteListado.estudiante._id]" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                     <a data-toggle="tooltip" 
                                         data-original-title="Close"
                                         class="cursor"> 

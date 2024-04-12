@@ -9,7 +9,7 @@ const base_url = environment.base_url;
 export class ModalImagenService {
 
   private _ocultarModal: boolean = true;
-  public tipo: 'usuarios'|'clientes'|'temas';
+  public tipo: 'usuarios'|'clientes'|'actas'|'titulos';
   public id: string;
   public img: string;
   public imagenCambio: EventEmitter<string> = new EventEmitter<string>();
@@ -19,20 +19,13 @@ export class ModalImagenService {
   }
 
   abrirModal(
-    tipo: 'usuarios'|'clientes'|'temas',
+    tipo: 'usuarios'|'clientes'|'actas'|'titulos',
     id: string,
     img: string = 'no-image'
   ){
     this._ocultarModal = false;
     this.tipo = tipo;
     this.id = id;
-
-    if(img.includes('https')){
-      this.img = img;
-    }else{
-      this.img = `${base_url}/uploads/${tipo}/${img}`;
-    }
-
   }
 
   cerrarModal(){

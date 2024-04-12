@@ -34,6 +34,16 @@ export class CursoService {
     }
   }
 
+  cargarCursoPorID( id: string){
+    const url = `${ base_url}/cursos/${id}`;
+
+    return this.http.get(url, this.headers )
+    .pipe(
+      map( (resp: any) => resp.curso )   
+    )
+    
+  }
+
   cargarCursosFiltrados(jornada: number = 0, nivel: number = 0)
   {
     const url = `${ base_url}/cursos/listado/filtro?jor=${jornada}&niv=${nivel}`;
@@ -55,6 +65,29 @@ export class CursoService {
         })
       )
   }
+
+  cargarCursosFiltradosTitulacion(jornada: number = 0, nivel: number = 0)
+  {
+    const url = `${ base_url}/cursos/listado/titulacion/filtro?jor=${jornada}`;
+
+    return this.http.get<CargarCurso>(url, this.headers )
+      .pipe(
+        map( resp => {
+          const cursos = resp.cursos.map(
+            //hay que tener presente el orden en el que se traen los datos desde el modelo
+            curso => new Curso(curso.grado, curso.grado_abrev, 
+              curso.orden, curso.nivel, curso.nivel_abrev, 
+              curso.paralelo, curso.jornada, curso.usuario, 
+              curso.estado, curso.especialidad, curso._id)
+          );
+          return {
+            total: resp.total,
+            cursos
+          };
+        })
+      )
+  }
+
 
 }
 

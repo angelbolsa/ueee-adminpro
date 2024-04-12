@@ -10,7 +10,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Cargar imagen</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Carga de información</h4>
                     <button type="button" 
                             (click)="cerrarModal()"
                             class="close" 
@@ -18,13 +18,7 @@
                              aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <h3>Selecciona una imagen</h3>
-
-                    <div class="text-center">
-                        <img *ngIf="!imgTemp" [src]="modalImagenSvr.img" class="img-avatar">
-                        <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar">
-                    </div>
-    
+                    <h3>Seleccione el archivo</h3>    
                     <input type="file"
                             (change)="cambiarImagen($any($event.target).files[0])">
 
@@ -36,7 +30,7 @@
                             data-dismiss="modal">Cerrar</button>
                     <button type="button" 
                             class="btn btn-primary"
-                            (click)="subirImagen()">Guardar imagen</button>
+                            (click)="subirArchivo()">Guardar archivo</button>
                 </div>
             </div>
         </div>

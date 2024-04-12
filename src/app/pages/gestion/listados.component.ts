@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, delay } from 'rxjs';
 
-import Swal from 'sweetalert2';
-
-import { Estudiante } from 'src/app/models/estudiante.model';
 import { Usuario } from 'src/app/models/usuario.model';
 
 import { BusquedasService } from 'src/app/services/busquedas.service';
@@ -15,18 +12,19 @@ import { Curso } from 'src/app/models/curso.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-estudiantes',
-  templateUrl: './estudiantes.component.html',
+  selector: 'app-listados',
+  templateUrl: './listados.component.html',
   styles: [
   ]
 })
 
-export class EstudiantesComponent implements OnInit, OnDestroy {
+export class ListadosComponent implements OnInit, OnDestroy {
   
   public totalEstudiantes: number;
   public estudiantesListado: Enrolamiento[] = [];
   public estudiantesListadoTemp: Enrolamiento[] = [];
   public cursos: Curso[] = [];
+  public cursoSeleccionado: string;
 
   public desde: number = 0;
   public cargando: boolean = false;
@@ -54,13 +52,21 @@ export class EstudiantesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.imgSubs.unsubscribe;
   }
 
   cargarEstudiantesPorCurso(){
     this.cargando = true;
     const curso = this.seleccionForm.get('cursoSeleccionado').value;
-    console.log(curso);
+    this.cursoService.cargarCursoPorID(curso)
+      .subscribe(
+        (curso) => {
+          this.cursoSeleccionado = `${curso.grado} ${curso.nivel} PARALELO "${curso.paralelo}"`;
+          if(curso.especialidad){
+            this.cursoSeleccionado = this.cursoSeleccionado + ` ESPECIALIDAD ${curso.especialidad}`
+          }
+          this.cursoSeleccionado = this.cursoSeleccionado + ` JORNADA ${curso.jornada}`
+        } 
+      );
     this.estudianteService.cargarEstudiantesPorCurso(curso)
       .subscribe(
         ({total, enrolamientos}) =>{
@@ -68,7 +74,6 @@ export class EstudiantesComponent implements OnInit, OnDestroy {
           this.estudiantesListado = enrolamientos;
           this.estudiantesListadoTemp = enrolamientos;
           this.cargando = false;
-          console.log(this.estudiantesListado);
         })
   }
   
@@ -82,17 +87,6 @@ export class EstudiantesComponent implements OnInit, OnDestroy {
           this.cursos = cursos;
         })
   }
-
-  cambiarPagina( valor: number){
-    this.desde += valor;
-
-    if(this.desde < 0){
-      this.desde = 0
-    }else if(this.desde > this.totalEstudiantes){
-      this.desde -= valor;
-    }
-  }
-
   buscar( busqueda: string){
   }
 

@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Estudiante</h4>
+                <h6 class="card-subtitle">Registro de información de estudiantes</h6>
+                <form class="form-horizontal p-t-20" 
+                      [formGroup]="estudianteForm"
+                      (submit)="guardarEstudiante()">
+    
+                    <!-- <div class="form-group row"
+                         *ngIf="estudianteSeleccionado">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <img [src]="estudianteSeleccionado.img_secure_url"
+                                     class="w140 cursor"
+                                     (click)="abrirModal(clienteSeleccionado)">
+                            </div>
+                        </div>
+                    </div> -->
+    
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Cédula*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-id-card-o"></i></div>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="exampleInputuname1" 
+                                       placeholder="Escriba la cédula del estudiante"
+                                       formControlName="cedula">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Apellidos*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="exampleInputuname2" 
+                                       placeholder="Escriba los apellidos del estudiante"
+                                       formControlName="apellidos">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Nombres*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="exampleInputuname3" 
+                                       placeholder="Escriba los nombres del estudiante"
+                                       formControlName="nombres">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Fecha de nacimiento*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="exampleInputuname4" 
+                                       placeholder="Escriba la fecha de nacimiento del estudiante"
+                                       formControlName="f_nac">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Sexo*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-group"></i></div>
+                                <select class="form-control"
+                                        formControlName="sexo">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option value="0" selected>Mujer</option>
+                                    <option value="1" selected>Hombre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                     <div class="form-group row">
+                        <label for="exampleInputEmail3" class="col-sm-3 control-label">Hospital</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <select class="form-control" formControlName="hospital">
+                                    <option value="">Seleccione un hospital...</option>
+                                    <option *ngFor="let hospital of hospitales" 
+                                            [value]="hospital._id">{{hospital.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group row m-b-0">
+                        <div class="offset-sm-3 col-sm-9">
+                            <button type="submit" 
+                                    class="btn btn-success waves-effect waves-light"
+                                    [disabled]="estudianteForm.invalid">
+                                <i class="fa fa-save"></i>
+                                Guardar cambios
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

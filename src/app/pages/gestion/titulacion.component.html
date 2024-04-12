@@ -1,0 +1,150 @@
+<!-- <div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Buscar usuario..."
+                        (keyup)="buscar(txtBusqueda.value)"
+                        #txtBusqueda/>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<form class="form p-t-20" 
+      [formGroup]="seleccionForm">
+
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <h6 class="card-subtitle mb-2">Filtros de búsqueda:</h6>    
+        <div class="form-group row">
+            <div class="col-4">
+                <div class="input-group">
+                    <div class="input-group-addon">Periodo:</div>
+                    <select class="form-control" 
+                            formControlName="periodo">
+                        <option selected value="0">Seleccione el periodo...</option>
+                        <option value="2023-2024">2023-2024</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <div class="input-group-addon">Jornada:</div>
+                    <select class="form-control" 
+                            formControlName="jornada"
+                            (change)="cargarCursos()">
+                        <option selected value="0">Seleccione la jornada...</option>
+                        <option value="1">MATUTINA</option>
+                        <option value="2">VESPERTINA</option>
+                        <option value="3">NOCTURNA</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <div class="input-group-addon">Curso:</div>
+                    <select class="form-control" 
+                            formControlName="cursoSeleccionado"
+                            (change)="cargarEstudiantesPorCurso()">
+                        <option selected [value]="0">Seleccione el curso...</option>
+                        <option *ngFor="let curso of cursos"
+                                value="{{curso._id}}">
+                                {{curso.grado_abrev}} {{curso.nivel_abrev}} "{{curso.paralelo}}" {{curso.especialidad}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+
+<div class="row animated fadeIn fast"
+    *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="card-title" *ngIf="cursoSeleccionado">Estudiantes de {{cursoSeleccionado}} ({{totalEstudiantes}})
+                        </h4>
+                        <h6 class="card-subtitle">Estudiantes titulados en el curso seleccionado</h6>    
+                    </div>
+                 </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered .full-color-table .full-purple-table .hover-tabl">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Cédula</th>
+                                <th>Apellidos</th>
+                                <th>Nombres</th>
+                                <th>Nota de grado</th>
+                                <th class="text-nowrap w100">Acta</th>
+                                <th class="text-nowrap w100">Título</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let estudianteListado of estudiantesListado; index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{estudianteListado.dataEstudiante.estudiante.cedula}}</td>
+                                <td>{{estudianteListado.dataEstudiante.estudiante.apellidos}}</td>
+                                <td>{{estudianteListado.dataEstudiante.estudiante.nombres}}</td>
+                                <td>{{estudianteListado.nota_grado}}</td>
+                                <td class="text-nowrap text-center">
+                                    <a *ngIf="!estudianteListado.acta_secure_url" 
+                                        (click)="modalSubirActa(estudianteListado._id)"
+                                        data-toggle="tooltip" 
+                                        data-original-title="Titulo"> 
+                                    <i class="mdi mdi-cloud-upload text-danger m-r-10 cursor"></i> 
+                                    </a>
+                                    <a *ngIf="estudianteListado.acta_secure_url" 
+                                        [href]="estudianteListado.acta_secure_url" 
+                                        target="_blank"
+                                        data-toggle="tooltip" 
+                                        data-original-title="View"
+                                        class="cursor"> 
+                                        <i class="mdi mdi-file-document text-info"></i> 
+                                    </a>
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <a *ngIf="!estudianteListado.titulo_secure_url"
+                                        (click)="modalSubirTitulo(estudianteListado._id)" 
+                                        data-toggle="tooltip" 
+                                        data-original-title="Acta"
+                                        class="cursor"> 
+                                       <i class="mdi mdi-cloud-upload text-danger"></i> 
+                                    </a>
+                                    <a *ngIf="estudianteListado.titulo_secure_url" [href]="estudianteListado.titulo_secure_url" 
+                                                target="_blank"
+                                                data-toggle="tooltip" 
+                                                data-original-title="View"
+                                                class="cursor"> 
+                                                <i class="mdi mdi-script text-info"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>              
+            </div>
+        </div>
+    </div>
+</div>
