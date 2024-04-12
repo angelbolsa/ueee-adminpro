@@ -34,7 +34,8 @@ const childRoutes: Routes = [
 
   //Rutas de cursos
 
-  { path:'cursos', component: CursosComponent, data: { titulo: 'Administración de cursos' } },
+  { path:'cursos/:id', component: CursosComponent, data: { titulo: 'Administración de información de curso' } },
+  { path:'cursos/nuevo', component: CursosComponent, data: { titulo: 'Creación de nuevo curso' } },
   
   //Rutas protegidas para admin
     

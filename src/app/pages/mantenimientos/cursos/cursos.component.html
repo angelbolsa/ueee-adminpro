@@ -1,1 +1,119 @@
-<p>cursos works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Estudiante</h4>
+                <h6 class="card-subtitle">Registro de información de estudiantes</h6>
+                <form class="form-horizontal p-t-20" 
+                      [formGroup]="cursoForm"
+                      (submit)="guardarCurso()">
+    
+                    <!-- <div class="form-group row"
+                         *ngIf="estudianteSeleccionado">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <img [src]="estudianteSeleccionado.img_secure_url"
+                                     class="w140 cursor"
+                                     (click)="abrirModal(clienteSeleccionado)">
+                            </div>
+                        </div>
+                    </div> -->
+   
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Grado*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
+                                <select class="form-control"
+                                        formControlName="grado">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let grado of grados" value="{{grado}}" selected>{{grado}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Nivel*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
+                                <select class="form-control"
+                                        formControlName="nivel">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let nivel of niveles" value="{{nivel}}">{{nivel}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Paralelo*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
+                                <select class="form-control"
+                                        formControlName="paralelo">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let paralelo of paralelos" value="{{paralelo}}">{{paralelo}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Jornada*</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
+                                <select class="form-control"
+                                        formControlName="jornada">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let jornada of jornadas" value="{{jornada}}">{{jornada}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Especialidad</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
+                                <select class="form-control"
+                                        formControlName="especialidad">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let especialidad of especialidades" value="{{especialidad}}">{{especialidad}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                     <div class="form-group row">
+                        <label for="exampleInputEmail3" class="col-sm-3 control-label">Hospital</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <select class="form-control" formControlName="hospital">
+                                    <option value="">Seleccione un hospital...</option>
+                                    <option *ngFor="let hospital of hospitales" 
+                                            [value]="hospital._id">{{hospital.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group row m-b-0">
+                        <div class="offset-sm-3 col-sm-9">
+                            <button type="submit" 
+                                    class="btn btn-success waves-effect waves-light"
+                                    [disabled]="cursoForm.invalid">
+                                <i class="fa fa-save"></i>
+                                Guardar cambios
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

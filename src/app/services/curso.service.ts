@@ -88,6 +88,17 @@ export class CursoService {
       )
   }
 
+  crearCurso( curso: Curso)
+  {
+    const url = `${ base_url}/cursos`;
+    return this.http.post(url, curso , this.headers );
+  }
+
+  actualizarCurso( curso: Curso)
+  {
+    const url = `${ base_url}/cursos/${curso._id}`;
+    return this.http.put(url, curso, this.headers );
+  }
 
 }
 
