@@ -1,118 +1,120 @@
-<div class="row">
-    <div class="col-md-6">
+<!-- <div class="row animated fadeIn fast">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Estudiante</h4>
-                <h6 class="card-subtitle">Registro de información de estudiantes</h6>
-                <form class="form-horizontal p-t-20" 
-                      [formGroup]="cursoForm"
-                      (submit)="guardarCurso()">
-    
-                    <!-- <div class="form-group row"
-                         *ngIf="estudianteSeleccionado">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <img [src]="estudianteSeleccionado.img_secure_url"
-                                     class="w140 cursor"
-                                     (click)="abrirModal(clienteSeleccionado)">
-                            </div>
-                        </div>
-                    </div> -->
-   
-                    <div class="form-group row">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Grado*</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
-                                <select class="form-control"
-                                        formControlName="grado">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let grado of grados" value="{{grado}}" selected>{{grado}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Nivel*</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
-                                <select class="form-control"
-                                        formControlName="nivel">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let nivel of niveles" value="{{nivel}}">{{nivel}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Paralelo*</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
-                                <select class="form-control"
-                                        formControlName="paralelo">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let paralelo of paralelos" value="{{paralelo}}">{{paralelo}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                <input type="text"
+                        class="form-control"
+                        placeholder="Buscar usuario..."
+                        (keyup)="buscar(txtBusqueda.value)"
+                        #txtBusqueda/>
+            </div>
+        </div>
+    </div>
+</div> -->
 
-                    <div class="form-group row">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Jornada*</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
+<form class="form p-t-20" 
+      [formGroup]="seleccionForm">
+    <div class="row animated fadeIn fast">
+        <div class="col-12">
+            <h6 class="card-subtitle mb-2">Filtros de búsqueda:</h6>    
+            <div class="form-group row">
+                
+                <div class="col-6">
+                    <div class="input-group">
+                        <div class="input-group-addon">Jornada:</div>
+                            <select class="form-control" 
+                                formControlName="jornada">
+                                <option selected value="0">Seleccione la jornada...</option>
+                                <option value="1">MATUTINA</option>
+                                <option value="2">VESPERTINA</option>
+                                <option value="3">NOCTURNA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <div class="input-group-addon">Periodo:</div>
                                 <select class="form-control"
-                                        formControlName="jornada">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let jornada of jornadas" value="{{jornada}}">{{jornada}}</option>
+                                    formControlName="nivel"
+                                    (change)="cargarCursos()">
+                                    <option value="0" selected>Seleccione...</option>
+                                    <option *ngFor="let nivel of niveles, index as i" value="{{i+1}}">{{nivel}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    <div class="form-group row">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Especialidad</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
-                                <select class="form-control"
-                                        formControlName="especialidad">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let especialidad of especialidades" value="{{especialidad}}">{{especialidad}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+</form>
 
-<!--                     <div class="form-group row">
-                        <label for="exampleInputEmail3" class="col-sm-3 control-label">Hospital</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <select class="form-control" formControlName="hospital">
-                                    <option value="">Seleccione un hospital...</option>
-                                    <option *ngFor="let hospital of hospitales" 
-                                            [value]="hospital._id">{{hospital.nombre}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="form-group row m-b-0">
-                        <div class="offset-sm-3 col-sm-9">
-                            <button type="submit" 
-                                    class="btn btn-success waves-effect waves-light"
-                                    [disabled]="cursoForm.invalid">
-                                <i class="fa fa-save"></i>
-                                Guardar cambios
-                            </button>
-                        </div>
+<div class="row animated fadeIn fast"
+    *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="text-right mb-3">
+                            <a class="btn btn-primary"
+                             routerLink="/dashboard/cursos/nuevo">
+                                <i class="fa fa-hospital-o"></i>
+                                Crear curso
+                            </a>
+                        </div>    
                     </div>
-                </form>
+                 </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Grado</th>
+                                <th>Nivel</th>
+                                <th>Paralelo</th>
+                                <th>Jornada</th>
+                                <th>Especialidad</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let curso of cursos; index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{curso.grado}}</td>
+                                <td>{{curso.nivel}}</td>
+                                <td>{{curso.paralelo}}</td>
+                                <td>{{curso.jornada}}</td>
+                                <td *ngIf="curso.especialidad">{{curso.especialidad}}</td>
+                                <td *ngIf="!curso.especialidad"></td>
+                                <td class="text-nowrap text-center">
+                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Close"
+                                        class="cursor"> 
+                                        <i class="fa fa-close text-danger"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- <div *ngIf="txtBusqueda.value.length===0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+                </div>                 -->
             </div>
         </div>
     </div>

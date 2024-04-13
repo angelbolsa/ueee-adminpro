@@ -13,6 +13,7 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { AdminGuard } from '../guards/admin.guard';
 import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
 import { CursosComponent } from './mantenimientos/cursos/cursos.component';
+import { CursoComponent } from './mantenimientos/cursos/curso.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { titulo: 'Dashboard' }, },
@@ -34,8 +35,8 @@ const childRoutes: Routes = [
 
   //Rutas de cursos
 
-  { path:'cursos/:id', component: CursosComponent, data: { titulo: 'Administración de información de curso' } },
-  { path:'cursos/nuevo', component: CursosComponent, data: { titulo: 'Creación de nuevo curso' } },
+  { path:'cursos', component: CursosComponent, data: { titulo: 'Administración de cursos' } },
+  { path:'cursos/:id', component: CursoComponent, data: { titulo: 'Administración de información de curso' } },
   
   //Rutas protegidas para admin
     

@@ -18,12 +18,14 @@ import { PipesModule } from '../pipes/pipes.module';
 import { SharedModule } from '../shared/shared.module';
 import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
 import { CursosComponent } from './mantenimientos/cursos/cursos.component';
+import { CursoComponent } from './mantenimientos/cursos/curso.component';
 
 @NgModule({
   declarations: [
     AccountSettingsComponent,
     AsignacionComponent,
     BusquedaComponent,
+    CursoComponent,
     CursosComponent,
     DashboardComponent,
     EstudianteComponent,
