@@ -53,7 +53,7 @@
                         <option selected [value]="0">Seleccione el curso...</option>
                         <option *ngFor="let curso of cursos"
                                 value="{{curso._id}}">
-                                {{curso.grado_abrev}} {{curso.nivel_abrev}} "{{curso.paralelo}}" {{curso.especialidad}}
+                                {{curso.grado}} {{curso.nivel}} "{{curso.paralelo}}" {{curso.especialidad}}
                         </option>
                     </select>
                 </div>

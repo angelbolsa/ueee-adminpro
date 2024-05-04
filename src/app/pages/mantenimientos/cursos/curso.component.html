@@ -2,8 +2,8 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Estudiante</h4>
-                <h6 class="card-subtitle">Registro de información de estudiantes</h6>
+                <h4 class="card-title">Curso</h4>
+                <h6 class="card-subtitle">Registro de información de curso</h6>
                 <form class="form-horizontal p-t-20" 
                       [formGroup]="cursoForm"
                       (submit)="guardarCurso()">
@@ -27,12 +27,13 @@
                                 <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
                                 <select class="form-control"
                                         formControlName="grado">
-                                    <option value="" selected>Seleccione...</option>
+                                    <option value="">Seleccione...</option>
                                     <option *ngFor="let grado of grados" value="{{grado}}" selected>{{grado}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="exampleInputuname3" class="col-sm-3 control-label">Nivel*</label>
                         <div class="col-sm-9">
@@ -40,13 +41,13 @@
                                 <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
                                 <select class="form-control"
                                         formControlName="nivel">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let nivel of niveles" value="{{nivel}}">{{nivel}}</option>
+                                    <option value="">Seleccione...</option>
+                                    <option *ngFor="let nivel of niveles" value="{{nivel}}" selected>{{nivel}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group row">
                         <label for="exampleInputuname3" class="col-sm-3 control-label">Paralelo*</label>
                         <div class="col-sm-9">
@@ -54,8 +55,8 @@
                                 <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
                                 <select class="form-control"
                                         formControlName="paralelo">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let paralelo of paralelos" value="{{paralelo}}">{{paralelo}}</option>
+                                    <option value="">Seleccione...</option>
+                                    <option *ngFor="let paralelo of paralelos" value="{{paralelo}}" selected>{{paralelo}}</option>
                                 </select>
                             </div>
                         </div>
@@ -68,14 +69,13 @@
                                 <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
                                 <select class="form-control"
                                         formControlName="jornada">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let jornada of jornadas" value="{{jornada}}">{{jornada}}</option>
+                                    <option value="">Seleccione...</option>
+                                    <option *ngFor="let jornada of jornadas" value="{{jornada}}" selected>{{jornada}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    
-                    
+
                     <div class="form-group row">
                         <label for="exampleInputuname3" class="col-sm-3 control-label">Especialidad</label>
                         <div class="col-sm-9">
@@ -83,13 +83,12 @@
                                 <div class="input-group-addon"><i class="mdi mdi-book-open-page-variant"></i></div>
                                 <select class="form-control"
                                         formControlName="especialidad">
-                                    <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let especialidad of especialidades" value="{{especialidad}}">{{especialidad}}</option>
+                                    <option value="">Seleccione...</option>
+                                    <option *ngFor="let especialidad of especialidades" value="{{especialidad}}" selected>{{especialidad}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-
 <!--                     <div class="form-group row">
                         <label for="exampleInputEmail3" class="col-sm-3 control-label">Hospital</label>
                         <div class="col-sm-9">

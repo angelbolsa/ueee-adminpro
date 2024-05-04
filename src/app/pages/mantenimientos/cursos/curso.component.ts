@@ -51,12 +51,10 @@ export class CursoComponent implements OnInit {
 
     this.cursoForm = this.fb.group({
       grado: ['', Validators.required],
-      grado_abrev: ['', Validators.required],
       nivel: ['', Validators.required],
-      nivel_abrev: ['', Validators.required],
       paralelo: ['', Validators.required],
       jornada: ['', Validators.required],
-      especialidad: ['' ]
+      especialidad: ['']
     });
   }
 
@@ -74,29 +72,28 @@ export class CursoComponent implements OnInit {
             return this.router.navigateByUrl(`/dashboard/cursos`);
           }
 
-          const { 
-            grado,
-            grado_abrev,
-            orden,
-            nivel,
-            nivel_abrev,
-            paralelo,
-            jornada,
-            especialidad
-          } = curso;
-          
           this.cursoSeleccionado = curso;
-          this.cursoForm.setValue({
-            grado,
-            grado_abrev,
-            orden,
-            nivel,
-            nivel_abrev,
-            paralelo,
-            jornada,
-            especialidad
-          });
-  
+          if(curso.especialidad)
+            {
+              this.cursoForm.setValue({
+                grado: this.cursoSeleccionado.grado,
+                nivel: this.cursoSeleccionado.nivel,
+                paralelo: this.cursoSeleccionado.paralelo,
+                jornada: this.cursoSeleccionado.jornada,
+                especialidad: this.cursoSeleccionado.especialidad
+              });
+            }else{
+              this.cursoForm.setValue({
+                grado: this.cursoSeleccionado.grado,
+                nivel: this.cursoSeleccionado.nivel,
+                paralelo: this.cursoSeleccionado.paralelo,
+                jornada: this.cursoSeleccionado.jornada,
+                especialidad: ''
+              });
+            }
+
+          console.log(curso);
+         
           return true;
         }
       )
@@ -105,37 +102,79 @@ export class CursoComponent implements OnInit {
   guardarCurso(){
 
     const { 
-      grado,
-            grado_abrev,
-            orden,
-            nivel,
-            nivel_abrev,
-            paralelo,
-            jornada,
-            especialidad 
+        grado,
+        nivel,
+        paralelo,
+        jornada,
+        especialidad 
     } = this.cursoForm.value;
+
+    var grado_abrev = ''
+    //enum: ['8VO', '9NO', '10MO', '1ER BACH.', '2DO BACH.', '3ER BACH.'],
+    switch (grado) {
+      case '8VO GRADO':
+        grado_abrev = '8VO'
+        break;
+      case '9NO GRADO':
+        grado_abrev = '9NO'
+        break;
+      case '10MO GRADO':
+        grado_abrev = '10MO'
+        break;
+      case '1ER CURSO':
+        grado_abrev = '1ER BACH.'
+        break;
+      case '2DO CURSO':
+        grado_abrev = '2DO BACH.'
+        break;
+      case '3ER CURSO':
+        grado_abrev = '3ER BACH.'
+        break;
+    }
+
+    var nivel_abrev = ''
+
+    switch (nivel) {
+      case 'EGB SUPERIOR':
+        nivel_abrev = 'EGB SUP.'
+        break;
+      case 'BACHILLERATO GENERAL UNIFICADO':
+        nivel_abrev = 'BGU'
+        break;
+      case 'BACHILLERATO TECNICO':
+        nivel_abrev = 'BT'
+        break;
+    }
 
     if(this.cursoSeleccionado){
       const cid = this.cursoSeleccionado._id;
       const data = {
-        //van todos los campos del formulario más el id del curso seleccionado
         _id: cid,
+        grado_abrev,
+        nivel_abrev,
         ...this.cursoForm.value,        
       }
+  
       this.cursoService.actualizarCurso(data)
           .subscribe(
             resp => {
               Swal.fire('Actualizado', `El curso ha sido actualizado correctamente`, 'success');
-              this.router.navigateByUrl(`/dashboard/cursos/`);
+              this.router.navigateByUrl(`/dashboard/cursos`);
             }
           )
     }else{
-      
-    this.cursoService.crearCurso(this.cursoForm.value)
+ 
+    const data = {
+      grado_abrev,
+      nivel_abrev,
+      ...this.cursoForm.value        
+    }
+
+    this.cursoService.crearCurso(data)
       .subscribe(
         (resp: any) => {
           Swal.fire('Creado', `El curso ha sido creado correctamente`, 'success');
-          this.router.navigateByUrl(`/dashboard/cursos/`);
+          this.router.navigateByUrl(`/dashboard/cursos`);
         },
         (err) => {
           Swal.fire('Error', err.error.msg, 'error' );

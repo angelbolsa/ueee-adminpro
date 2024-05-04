@@ -5,7 +5,6 @@ import { Subscription, delay } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { Curso } from 'src/app/models/curso.model';
-import { Usuario } from 'src/app/models/usuario.model';
 
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import { CursoService } from 'src/app/services/curso.service';
@@ -20,7 +19,6 @@ export class CursosComponent implements OnInit, OnDestroy{
 
   public totalCursos: number;
   public cursos: Curso[] = [];
-  public cursosTemp: Curso[] = [];
   public desde: number = 0;
   public cargando: boolean = false;
   public imgSubs: Subscription;
@@ -47,16 +45,18 @@ export class CursosComponent implements OnInit, OnDestroy{
   cargarCursos(){
     const jornada = this.seleccionForm.get('jornada').value;
     const nivel = this.seleccionForm.get('nivel').value;
-
-    this.cargando = true;
-    this.cursoService.cargarCursosFiltrados(jornada, nivel)
+    if(jornada>0 && nivel>0){
+      this.cargando = true;
+      this.cursoService.cargarCursosFiltrados(jornada, nivel)
       .subscribe(
         ({total, cursos}) =>{
           this.totalCursos = total;
           this.cursos = cursos;
-          this.cursosTemp = cursos;
           this.cargando = false;
-        })
+        }) 
+    }else{
+      this.cursos = [];
+    }
   }
 
   cambiarPagina( valor: number){
@@ -68,6 +68,11 @@ export class CursosComponent implements OnInit, OnDestroy{
       this.desde -= valor;
     }
     this.cargarCursos();
+  }
+
+  cambiaJornada(){
+    this.seleccionForm.controls['nivel'].setValue(0);
+    this.cursos = [];
   }
 
   // buscar(termino: string){

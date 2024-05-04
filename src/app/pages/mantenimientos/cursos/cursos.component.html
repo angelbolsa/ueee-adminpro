@@ -23,7 +23,8 @@
                     <div class="input-group">
                         <div class="input-group-addon">Jornada:</div>
                             <select class="form-control" 
-                                formControlName="jornada">
+                                formControlName="jornada"
+                                (change)="cambiaJornada()">
                                 <option selected value="0">Seleccione la jornada...</option>
                                 <option value="1">MATUTINA</option>
                                 <option value="2">VESPERTINA</option>
@@ -33,7 +34,7 @@
                     </div>
                     <div class="col-6">
                         <div class="input-group">
-                            <div class="input-group-addon">Periodo:</div>
+                            <div class="input-group-addon">Nivel:</div>
                                 <select class="form-control"
                                     formControlName="nivel"
                                     (change)="cargarCursos()">
@@ -68,7 +69,7 @@
                     <div class="col">
                         <div class="text-right mb-3">
                             <a class="btn btn-primary"
-                             routerLink="/dashboard/cursos/nuevo">
+                             routerLink="/dashboard/curso/nuevo">
                                 <i class="fa fa-hospital-o"></i>
                                 Crear curso
                             </a>
@@ -98,7 +99,11 @@
                                 <td *ngIf="curso.especialidad">{{curso.especialidad}}</td>
                                 <td *ngIf="!curso.especialidad"></td>
                                 <td class="text-nowrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a [routerLink]="['/dashboard/curso', curso._id]" 
+                                       data-toggle="tooltip" 
+                                       data-original-title="Edit">
+                                       <i class="fa fa-pencil text-inverse m-r-10"></i>
+                                    </a>
                                     <a data-toggle="tooltip" 
                                         data-original-title="Close"
                                         class="cursor"> 
