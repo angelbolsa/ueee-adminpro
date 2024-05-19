@@ -14,6 +14,7 @@ import { AdminGuard } from '../guards/admin.guard';
 import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
 import { CursosComponent } from './mantenimientos/cursos/cursos.component';
 import { CursoComponent } from './mantenimientos/cursos/curso.component';
+import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-estudiantil.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { titulo: 'Dashboard' }, },
@@ -31,7 +32,7 @@ const childRoutes: Routes = [
   //Rutas de estudiantes
 
   { path:'estudiantes/:id', component: EstudianteComponent, data: { titulo: 'Administración de datos de estudiantes' } },
-  { path:'asignacion', component: AsignacionComponent, data: { titulo: 'Asignación de estudiantes' } },
+  { path:'perfil-estudiantil', component: PerfilEstudiantilComponent, data: { titulo: 'Datos de perfil estudiantil' } },
 
   //Rutas de cursos
 

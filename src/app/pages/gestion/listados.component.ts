@@ -10,6 +10,7 @@ import { Enrolamiento } from 'src/app/models/enrolamiento.model';
 import { CursoService } from 'src/app/services/curso.service';
 import { Curso } from 'src/app/models/curso.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Estudiante } from 'src/app/models/estudiante.model';
 
 @Component({
   selector: 'app-listados',
@@ -87,6 +88,7 @@ export class ListadosComponent implements OnInit, OnDestroy {
           this.cursos = cursos;
         })
   }
+  
   buscar( busqueda: string){
   }
 

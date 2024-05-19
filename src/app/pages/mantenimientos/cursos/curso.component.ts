@@ -54,7 +54,8 @@ export class CursoComponent implements OnInit {
       nivel: ['', Validators.required],
       paralelo: ['', Validators.required],
       jornada: ['', Validators.required],
-      especialidad: ['']
+      especialidad: [''],
+      orden: ['']
     });
   }
 
@@ -73,6 +74,12 @@ export class CursoComponent implements OnInit {
           }
 
           this.cursoSeleccionado = curso;
+          var orden: number;
+          if(!this.cursoSeleccionado.orden){
+            orden = 0;
+          }else{
+            orden = this.cursoSeleccionado.orden;
+          }
           if(curso.especialidad)
             {
               this.cursoForm.setValue({
@@ -80,7 +87,8 @@ export class CursoComponent implements OnInit {
                 nivel: this.cursoSeleccionado.nivel,
                 paralelo: this.cursoSeleccionado.paralelo,
                 jornada: this.cursoSeleccionado.jornada,
-                especialidad: this.cursoSeleccionado.especialidad
+                especialidad: this.cursoSeleccionado.especialidad,
+                orden
               });
             }else{
               this.cursoForm.setValue({
@@ -88,12 +96,10 @@ export class CursoComponent implements OnInit {
                 nivel: this.cursoSeleccionado.nivel,
                 paralelo: this.cursoSeleccionado.paralelo,
                 jornada: this.cursoSeleccionado.jornada,
+                orden,
                 especialidad: ''
               });
-            }
-
-          console.log(curso);
-         
+            }       
           return true;
         }
       )

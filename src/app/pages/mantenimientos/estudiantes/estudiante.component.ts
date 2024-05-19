@@ -53,7 +53,7 @@ export class EstudianteComponent implements OnInit {
         .subscribe( (estudiante: Estudiante) => {
 
           if( !estudiante ){
-            return this.router.navigateByUrl(`/dashboard/estudiantes`);
+            return this.router.navigateByUrl(`/dashboard/gestion/listados`);
           }
 
           const { cedula, apellidos, nombres, f_nac, sexo } = estudiante;
@@ -81,7 +81,7 @@ export class EstudianteComponent implements OnInit {
           .subscribe(
             resp => {
               Swal.fire('Actualizado', `${ apellidos } ${ nombres } actualizado corréctamente`, 'success');
-              this.router.navigateByUrl(`/dashboard/estudiantes/`);
+              this.router.navigateByUrl(`/dashboard/gestion/listados`);
             }
           )
     }else{
@@ -90,7 +90,7 @@ export class EstudianteComponent implements OnInit {
       .subscribe(
         (resp: any) => {
           Swal.fire('Creado', `${ apellidos } ${ nombres } creado corréctamente`, 'success');
-          this.router.navigateByUrl(`/dashboard/estudiantes/`);
+          this.router.navigateByUrl(`/dashboard/gestion/listados`);
         },
         (err) => {
           Swal.fire('Error', err.error.msg, 'error' );
