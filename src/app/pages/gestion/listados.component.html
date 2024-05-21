@@ -124,7 +124,7 @@
                                     <span *ngIf="estudianteListado.estudiante.sexo==1" class="label label-info">Hombre</span>
                                 </td>
                                 <td class="text-nowrap text-center">
-                                    <a [routerLink]="['/dashboard/estudiantes', estudianteListado.estudiante._id]" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a [routerLink]="['/dashboard/estudiantes', estudianteListado.estudiante._id]" fragment="top-perfil" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                     <a data-toggle="tooltip" 
                                         data-original-title="Close"
                                         class="cursor"> 

@@ -34,6 +34,12 @@ export class EstudianteComponent implements OnInit {
     this.activatedRoute.params
         .subscribe( ({id}) => this.cargarEstudiante(id) );
 
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+
     this.estudianteForm = this.fb.group({
       cedula: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -97,8 +103,6 @@ export class EstudianteComponent implements OnInit {
             var fecha_embarazo: string = "";
           }
 
-
-          
           const datosFormulario = {
             cedula,  
             apellidos, 
@@ -159,7 +163,7 @@ export class EstudianteComponent implements OnInit {
           )
     }else{
       
-    this.estudianteService.crearCliente(this.estudianteForm.value)
+    this.estudianteService.crearEstudiante(this.estudianteForm.value)
       .subscribe(
         (resp: any) => {
           Swal.fire('Creado', `${ apellidos } ${ nombres } creado corréctamente`, 'success');
@@ -170,6 +174,10 @@ export class EstudianteComponent implements OnInit {
         }
       )
     }    
+  }
+
+  reset(){    
+    this.estudianteForm.reset();
   }
 
   // abrirModal(estudiante: Estudiante){

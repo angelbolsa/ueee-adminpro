@@ -84,19 +84,19 @@ export class EstudianteService {
       )
   }
 
-  crearCliente( cliente: Cliente)
+  crearEstudiante( estudiante: Estudiante )
   {
-    const url = `${ base_url}/clientes`;
-    return this.http.post(url, cliente , this.headers );
+    const url = `${ base_url}/estudiantes`;
+    return this.http.post(url, estudiante , this.headers );
   }
 
-  actualizarEstudiante( estudiante: Estudiante)
+  actualizarEstudiante( estudiante: Estudiante )
   {
     const url = `${ base_url}/estudiantes/${estudiante._id}`;
     return this.http.put(url, estudiante, this.headers );
   }
 
-  eliminarCliente( _id: string)
+  eliminarCliente( _id: string )
   {
     const url = `${ base_url}/clientes/${_id}`;
     return this.http.delete(url, this.headers );

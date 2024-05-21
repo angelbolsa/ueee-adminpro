@@ -32,6 +32,7 @@ const childRoutes: Routes = [
   //Rutas de estudiantes
   //Si deseamos usar enlaces sin parámetros debemos ubicarlos antes de los que usan parámetros
   
+  { path:'estudiantes/asignacion', component: AsignacionComponent, data: { titulo: 'Asignación de estudiantes' } },
   { path:'estudiantes/perfil', component: PerfilEstudiantilComponent, data: { titulo: 'Datos de perfil estudiantil' } },
   { path:'estudiantes/:id', component: EstudianteComponent, data: { titulo: 'Administración de datos de estudiantes' } },
 

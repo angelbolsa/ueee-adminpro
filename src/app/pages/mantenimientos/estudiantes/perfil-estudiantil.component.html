@@ -4,7 +4,7 @@
             <div class="card-body">
                 <input type="text"
                         class="form-control"
-                        placeholder="Buscar usuario..."
+                        placeholder="Buscar estudiante..."
                         (keyup)="buscar(txtBusqueda.value)"
                         #txtBusqueda/>
             </div>
@@ -31,8 +31,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Total de Estudiantes ({{totalEstudiantes}})</h4>
-                        <h6 class="card-subtitle">Estudiantes encontrados en la búsqueda</h6>    
+                        <h4 class="card-subtitle">Estudiantes encontrados en la búsqueda</h4>    
                     </div>
                  </div>
                 <div class="table-responsive">
@@ -64,13 +63,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-
-                <div *ngIf="txtBusqueda.value.length===0">
-                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
-                    &nbsp;
-                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
-                </div>                
+                </div>              
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<div class="row">
+<div id="top-perfil" class="row">
     <div class="col-lg-12">
         <div class="card ">
             <div class="card-header bg-info">
@@ -20,7 +20,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="cedula"
-                                                readonly>
+                                                [readonly]="estudianteSeleccionado">
                                 </div>
                                 </div>
                             </div>
@@ -58,7 +58,9 @@
                                     <label class="control-label text-right col-md-3">Sexo</label>
                                     <div class="col-md-9">
                                         <select class="form-control custom-select"
-                                                formControlName="sexo">
+                                                formControlName="sexo"
+                                                data-placeholder="--seleccione--">
+                                            <option value="">--seleccione--</option>
                                             <option value="1">Hombre</option>
                                             <option value="0">Mujer</option>
                                         </select>
@@ -91,6 +93,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="ciudad">
+                                        <small class="form-control-feedback"> Use mayúsculas. </small>
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +104,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="direccion">
+                                        <small class="form-control-feedback"> Use mayúsculas. </small>
                                     </div>
                                 </div>
                             </div>
@@ -141,6 +145,7 @@
                                         <select class="form-control custom-select" 
                                                 data-placeholder="--seleccione--"
                                                 formControlName="discapacidad">
+                                            <option value="">--seleccione--</option>    
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -155,7 +160,7 @@
                                         <select class="form-control custom-select" 
                                                 data-placeholder="--seleccione--"
                                                 formControlName="discapacidad_detalle">
-                                            <option value="0">--seleccione--</option>
+                                            <option value="">--seleccione--</option>
                                             <option value="Auditiva">Auditiva</option>
                                             <option value="Intelectual">Intelectual</option>
                                             <option value="Física">Física</option>
@@ -174,8 +179,9 @@
                                     <label class="control-label text-right col-md-3">¿Enfermedad catastrófica?</label>
                                     <div class="col-md-9">
                                         <select class="form-control custom-select" 
-                                                data-placeholder="--seleccione--"
+                                                data-placeholder="No"
                                                 formControlName="enfermedad_catastrofica">
+                                            <option value="">--seleccione--</option>
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -190,6 +196,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="enfermedad_catastrofica_detalle">
+                                        <small class="form-control-feedback"> Use mayúsculas. </small>
                                     </div>
                                 </div>
                             </div>
@@ -201,8 +208,9 @@
                                     <label class="control-label text-right col-md-3">¿Alergia?</label>
                                     <div class="col-md-9">
                                         <select class="form-control custom-select" 
-                                                data-placeholder="--seleccione--"
+                                                data-placeholder="No"
                                                 formControlName="alergia">
+                                            <option value="">--seleccione--</option>
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -217,6 +225,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="alergia_detalle">
+                                        <small class="form-control-feedback"> Use mayúsculas. </small>
                                     </div>
                                 </div>
                             </div>
@@ -228,8 +237,9 @@
                                     <label class="control-label text-right col-md-3">¿Embarazo?</label>
                                     <div class="col-md-9">
                                         <select class="form-control custom-select" 
-                                                data-placeholder="--seleccione--"
+                                                data-placeholder="No"
                                                 formControlName="embarazo">
+                                            <option value="">--seleccione--</option>
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -267,6 +277,7 @@
                                     <label class="control-label text-right col-md-3">Nombre representante</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" formControlName="representante_nombre_completo">
+                                        <small class="form-control-feedback"> Use mayúsculas. </small>
                                     </div>
                                 </div>
                             </div>
@@ -310,6 +321,7 @@
                                     <label class="control-label text-right col-md-3">Nombre de la madre</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" formControlName="madre_nombre_completo">
+                                        <small class="form-control-feedback"> Use mayúsculas. </small>
                                     </div>
                                 </div>
                             </div>
@@ -353,6 +365,7 @@
                                     <label class="control-label text-right col-md-3">Nombre del padre</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" formControlName="padre_nombre_completo">
+                                        <small class="form-control-feedback"> Use mayúsculas. </small>
                                     </div>
                                 </div>
                             </div>
@@ -386,8 +399,10 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button type="submit" class="btn btn-success mr-1">Guardar</button>
-                                        <button type="button" class="btn btn-inverse">Cancel</button>
+                                        <button type="submit" 
+                                                class="btn btn-success mr-1"
+                                                [disabled]="estudianteForm.invalid">Guardar</button>
+                                        <button type="button" class="btn btn-inverse" onclick="reset()">Cancel</button>
                                     </div>
                                 </div>
                             </div>
