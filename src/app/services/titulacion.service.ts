@@ -41,7 +41,9 @@ export class TitulacionService {
         map( resp => {
           const estudiantes = resp.estudiantes.map(
             //hay que tener presente el orden en el que se traen los datos desde el modelo
-            estudiante => new Estudiante(estudiante.cedula, estudiante.apellidos, estudiante.nombres, estudiante.f_nac, estudiante.sexo, estudiante.img, estudiante.estado, estudiante.usuario, estudiante._id)
+            estudiante => new Estudiante(estudiante.cedula, estudiante.apellidos, estudiante.nombres, 
+              estudiante.f_nac, estudiante.sexo, estudiante.ciudad, estudiante.direccion, estudiante.celular, estudiante.email,
+              estudiante.img, estudiante.estado, estudiante.usuario, estudiante._id)
           );
           return {
             total: resp.total,

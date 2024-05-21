@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, delay } from 'rxjs';
 import { Estudiante } from 'src/app/models/estudiante.model';
+import { formatDate } from '@angular/common';
 
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
 import Swal from 'sweetalert2';
@@ -38,7 +39,11 @@ export class EstudianteComponent implements OnInit {
       apellidos: ['', Validators.required],
       nombres: ['', Validators.required],
       f_nac: ['', Validators.required],
-      sexo: ['', Validators.required]
+      sexo: ['', Validators.required],
+      ciudad: [''],
+      direccion: [''],
+      celular: [''],
+      email: ['']
     });
   }
 
@@ -56,10 +61,23 @@ export class EstudianteComponent implements OnInit {
             return this.router.navigateByUrl(`/dashboard/gestion/listados`);
           }
 
-          const { cedula, apellidos, nombres, f_nac, sexo } = estudiante;
+          const { cedula, apellidos, nombres, f_nac, sexo, ciudad, direccion, celular, email } = estudiante;
+          const fecha: string = formatDate(f_nac,'yyyy-MM-dd','EN');
+          
+          const datosFormulario = {
+            cedula,  
+            apellidos, 
+            nombres, 
+            f_nac: fecha, 
+            sexo, 
+            ciudad: ciudad ? estudiante.ciudad : null, 
+            direccion: direccion ? estudiante.direccion : null, 
+            celular: celular ? estudiante.celular : null, 
+            email: email ? estudiante.email : null
+          }          
           
           this.estudianteSeleccionado = estudiante;
-          this.estudianteForm.setValue({cedula, apellidos, nombres, f_nac, sexo});
+          this.estudianteForm.setValue(datosFormulario);
   
           return true;
         }

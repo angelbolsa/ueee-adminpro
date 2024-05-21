@@ -19,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
 import { CursosComponent } from './mantenimientos/cursos/cursos.component';
 import { CursoComponent } from './mantenimientos/cursos/curso.component';
+import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-estudiantil.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CursoComponent } from './mantenimientos/cursos/curso.component';
     ListadosComponent,
     PagesComponent,
     PerfilComponent,
+    PerfilEstudiantilComponent,
     TitulacionComponent,
     UsuariosComponent
   ],

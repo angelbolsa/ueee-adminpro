@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../models/usuario.model';
 import { Cliente } from '../models/cliente.model';
+import { Estudiante } from '../models/estudiante.model';
 
 const base_url = environment.base_url;
 
@@ -35,10 +36,13 @@ export class BusquedasService {
     );
   }
 
-  private transformarClientes( resultados: any[]): Cliente[]{
+  private transformarEstudiantes( resultados: any[]): Estudiante[]{
     return resultados.map(
-      cliente => new Cliente(cliente.cedula, cliente.nombre_completo, cliente.direccion, cliente.celular, cliente.correo, cliente.tipo_cliente, cliente.img, cliente.usuario, cliente._id));
-    }
+      estudiante => new Estudiante(estudiante.cedula, estudiante.apellidos, estudiante.nombres, 
+        estudiante.f_nac, estudiante.sexo, estudiante.ciudad, estudiante.direccion, estudiante.celular, estudiante.email,
+        estudiante.img, estudiante.estado, estudiante.usuario, estudiante._id)
+    );
+  }
   
   buscarTodo(  termino: string){
     console.log(termino);
@@ -46,7 +50,7 @@ export class BusquedasService {
       return this.http.get(url, this.headers )
   }
 
-  buscar( tipo: 'usuarios'|'clientes'|'temas', termino: string){
+  buscar( tipo: 'usuarios'|'estudiantes'|'temas', termino: string){
     const url = `${base_url}/busqueda/${ tipo }/${termino}`;
     return this.http.get<any[]>(url, this.headers )
       .pipe( 
@@ -56,8 +60,8 @@ export class BusquedasService {
           switch (tipo) {
             case 'usuarios':
               return this.transformarUsuarios(resp.data);
-            case 'clientes':
-              return this.transformarClientes(resp.data);             
+            case 'estudiantes':
+              return this.transformarEstudiantes(resp.data);             
             default:
               return[];
           }

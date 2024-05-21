@@ -3,18 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { CursoComponent } from './mantenimientos/cursos/curso.component';
+import { CursosComponent } from './mantenimientos/cursos/cursos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EstudianteComponent } from './mantenimientos/estudiantes/estudiante.component';
 import { ListadosComponent } from './gestion/listados.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-estudiantil.component';
 import { TitulacionComponent } from './gestion/titulacion.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 import { AdminGuard } from '../guards/admin.guard';
 import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
-import { CursosComponent } from './mantenimientos/cursos/cursos.component';
-import { CursoComponent } from './mantenimientos/cursos/curso.component';
-import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-estudiantil.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { titulo: 'Dashboard' }, },
@@ -30,9 +30,10 @@ const childRoutes: Routes = [
   { path:'gestion/titulacion', canActivate: [AdminGuard] ,component: TitulacionComponent, data: { titulo: 'Módulo de títulos de bachiller' } },
 
   //Rutas de estudiantes
-
+  //Si deseamos usar enlaces sin parámetros debemos ubicarlos antes de los que usan parámetros
+  
+  { path:'estudiantes/perfil', component: PerfilEstudiantilComponent, data: { titulo: 'Datos de perfil estudiantil' } },
   { path:'estudiantes/:id', component: EstudianteComponent, data: { titulo: 'Administración de datos de estudiantes' } },
-  { path:'perfil-estudiantil', component: PerfilEstudiantilComponent, data: { titulo: 'Datos de perfil estudiantil' } },
 
   //Rutas de cursos
 
