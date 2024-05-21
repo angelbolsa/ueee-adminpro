@@ -19,7 +19,8 @@
                                     <div class="col-md-9">
                                         <input  type="text" 
                                                 class="form-control"
-                                                formControlName="cedula">
+                                                formControlName="cedula"
+                                                readonly>
                                 </div>
                                 </div>
                             </div>
@@ -137,7 +138,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">¿Discapacidad?</label>
                                     <div class="col-md-9">
-                                        <select class="form-control custom-select" data-placeholder="--seleccione--">
+                                        <select class="form-control custom-select" 
+                                                data-placeholder="--seleccione--"
+                                                formControlName="discapacidad">
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -149,7 +152,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Detalle discapacidad</label>
                                     <div class="col-md-9">
-                                        <select class="form-control custom-select" data-placeholder="--seleccione--">
+                                        <select class="form-control custom-select" 
+                                                data-placeholder="--seleccione--"
+                                                formControlName="discapacidad_detalle">
                                             <option value="0">--seleccione--</option>
                                             <option value="Auditiva">Auditiva</option>
                                             <option value="Intelectual">Intelectual</option>
@@ -168,7 +173,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">¿Enfermedad catastrófica?</label>
                                     <div class="col-md-9">
-                                        <select class="form-control custom-select" data-placeholder="--seleccione--">
+                                        <select class="form-control custom-select" 
+                                                data-placeholder="--seleccione--"
+                                                formControlName="enfermedad_catastrofica">
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -180,7 +187,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Detalle enfermedad</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="enfermedad_catastrofica_detalle">
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +200,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">¿Alergia?</label>
                                     <div class="col-md-9">
-                                        <select class="form-control custom-select" data-placeholder="--seleccione--">
+                                        <select class="form-control custom-select" 
+                                                data-placeholder="--seleccione--"
+                                                formControlName="alergia">
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -203,7 +214,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Detalle de alergia</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="alergia_detalle">
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +227,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">¿Embarazo?</label>
                                     <div class="col-md-9">
-                                        <select class="form-control custom-select" data-placeholder="--seleccione--">
+                                        <select class="form-control custom-select" 
+                                                data-placeholder="--seleccione--"
+                                                formControlName="embarazo">
                                             <option value="0">No</option>
                                             <option value="1">Si</option>
                                         </select>
@@ -226,7 +241,9 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Fecha diagnóstico</label>
                                     <div class="col-md-9">
-                                        <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                        <input type="date" class="form-control" 
+                                               placeholder="dd/mm/yyyy"
+                                               formControlName="embarazo_fecha">
                                         <small class="form-control-feedback"> Indique la fecha apróximada de embarazo según diagnóstico. </small> 
                                     </div>
                                 </div>
@@ -241,7 +258,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Cédula representante</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="representante_cedula">
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +266,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Nombre representante</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="representante_nombre_completo">
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +276,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Celular representante</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="representante_celular">
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +285,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Email representante</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="representante_email">
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +301,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Cédula de la madre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="madre_cedula">
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +309,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Nombre de la madre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="madre_nombre_completo">
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +319,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Celular de la madre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="madre_celular">
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +328,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Email de la madre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="madre_email">
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +344,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Cédula del padre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="padre_cedula">
                                     </div>
                                 </div>
                             </div>
@@ -335,7 +352,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Nombre del padre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="padre_nombre_completo">
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +362,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Celular del padre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="padre_celular">
                                     </div>
                                 </div>
                             </div>
@@ -354,7 +371,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Email del padre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="padre_email">
                                     </div>
                                 </div>
                             </div>
@@ -369,7 +386,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button type="submit" class="btn btn-success mr-1">Submit</button>
+                                        <button type="submit" class="btn btn-success mr-1">Guardar</button>
                                         <button type="button" class="btn btn-inverse">Cancel</button>
                                     </div>
                                 </div>

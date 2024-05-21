@@ -43,7 +43,27 @@ export class EstudianteComponent implements OnInit {
       ciudad: [''],
       direccion: [''],
       celular: [''],
-      email: ['']
+      email: [''],
+      discapacidad: [''],
+      discapacidad_detalle: [''],
+      enfermedad_catastrofica: [''],
+      enfermedad_catastrofica_detalle: [''],
+      alergia: [''],
+      alergia_detalle: [''],
+      embarazo: [''],
+      embarazo_fecha: [''],
+      representante_cedula: [''],
+      representante_nombre_completo: [''],
+      representante_celular: [''],
+      representante_email: [''],
+      madre_cedula: [''],
+      madre_nombre_completo: [''],
+      madre_celular: [''],
+      madre_email: [''],
+      padre_cedula: [''],
+      padre_nombre_completo: [''],
+      padre_celular: [''],
+      padre_email: [''],
     });
   }
 
@@ -61,20 +81,55 @@ export class EstudianteComponent implements OnInit {
             return this.router.navigateByUrl(`/dashboard/gestion/listados`);
           }
 
-          const { cedula, apellidos, nombres, f_nac, sexo, ciudad, direccion, celular, email } = estudiante;
-          const fecha: string = formatDate(f_nac,'yyyy-MM-dd','EN');
+          const { cedula, apellidos, nombres, f_nac, sexo, ciudad, direccion, celular, email,
+                  discapacidad, discapacidad_detalle, enfermedad_catastrofica, enfermedad_catastrofica_detalle,
+                  alergia, alergia_detalle, embarazo, embarazo_fecha, 
+                  representante_cedula, representante_nombre_completo, representante_celular, representante_email,
+                  madre_cedula, madre_nombre_completo, madre_celular, madre_email,
+                  padre_cedula, padre_nombre_completo, padre_celular, padre_email
+                  
+           } = estudiante;
+          const fecha_nacimiento: string = formatDate(f_nac,'yyyy-MM-dd','EN');
+          
+          if(embarazo_fecha){
+            var fecha_embarazo: string = formatDate(embarazo_fecha,'yyyy-MM-dd','EN');
+          }else{
+            var fecha_embarazo: string = "";
+          }
+
+
           
           const datosFormulario = {
             cedula,  
             apellidos, 
             nombres, 
-            f_nac: fecha, 
+            f_nac: fecha_nacimiento, 
             sexo, 
             ciudad: ciudad ? estudiante.ciudad : null, 
             direccion: direccion ? estudiante.direccion : null, 
             celular: celular ? estudiante.celular : null, 
-            email: email ? estudiante.email : null
-          }          
+            email: email ? estudiante.email : null,
+            discapacidad: discapacidad ? estudiante.discapacidad : 0,
+            discapacidad_detalle: discapacidad_detalle ? estudiante.discapacidad_detalle : null,
+            enfermedad_catastrofica: enfermedad_catastrofica ? estudiante.enfermedad_catastrofica : 0,
+            enfermedad_catastrofica_detalle: enfermedad_catastrofica_detalle ? estudiante.enfermedad_catastrofica_detalle : null,
+            alergia: alergia ? estudiante.alergia : 0,
+            alergia_detalle: alergia_detalle ? estudiante.alergia_detalle : null,
+            embarazo: embarazo ? estudiante.embarazo : 0,
+            embarazo_fecha: fecha_embarazo,
+            representante_cedula: representante_cedula ? estudiante.representante_cedula : null,
+            representante_nombre_completo: representante_nombre_completo ? estudiante.representante_nombre_completo : null,
+            representante_celular: representante_celular ? estudiante.representante_celular : null,
+            representante_email: representante_email ? estudiante.representante_email : null,
+            madre_cedula: madre_cedula ? estudiante.madre_cedula : null,
+            madre_nombre_completo: madre_nombre_completo ? estudiante.madre_nombre_completo : null,
+            madre_celular: madre_celular ? estudiante.madre_celular : null,
+            madre_email: madre_email ? estudiante.madre_email : null,
+            padre_cedula: padre_cedula ? estudiante.padre_cedula : null,
+            padre_nombre_completo: padre_nombre_completo ? estudiante.padre_nombre_completo : null,
+            padre_celular: padre_celular ? estudiante.padre_celular : null,
+            padre_email: padre_email ? estudiante.padre_email : null,
+        }          
           
           this.estudianteSeleccionado = estudiante;
           this.estudianteForm.setValue(datosFormulario);
