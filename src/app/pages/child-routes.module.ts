@@ -31,19 +31,20 @@ const childRoutes: Routes = [
 
   //Rutas de estudiantes
   //Si deseamos usar enlaces sin parámetros debemos ubicarlos antes de los que usan parámetros
-  
-  { path:'estudiantes/asignacion', component: AsignacionComponent, data: { titulo: 'Asignación de estudiantes' } },
+  { path:'estudiantes/asignacion', canActivate: [AdminGuard] ,component: AsignacionComponent, data: { titulo: 'Asignación de estudiantes' } },
   { path:'estudiantes/perfil', component: PerfilEstudiantilComponent, data: { titulo: 'Datos de perfil estudiantil' } },
   { path:'estudiantes/:id', component: EstudianteComponent, data: { titulo: 'Administración de datos de estudiantes' } },
 
   //Rutas de cursos
-
-  { path:'cursos', component: CursosComponent, data: { titulo: 'Administración de cursos' } },
+  { path:'cursos', canActivate: [AdminGuard] ,component: CursosComponent, data: { titulo: 'Administración de cursos' } },
   { path:'curso/:id', component: CursoComponent, data: { titulo: 'Administración de información de curso' } },
   
   //Rutas protegidas para admin
     
   { path:'usuarios', canActivate: [AdminGuard] ,component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios' } },
+
+
+
 
 ]
 
