@@ -9,6 +9,7 @@ import { Curso } from 'src/app/models/curso.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import { CursoService } from 'src/app/services/curso.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -23,13 +24,14 @@ export class CursosComponent implements OnInit, OnDestroy{
   public cargando: boolean = false;
   public imgSubs: Subscription;
   public niveles: string[] = ['EGB SUPERIOR', 'BACHILLERATO GENERAL UNIFICADO', 'BACHILLERATO TECNICO'];
-
+  public nivelUsuario;
 
   public seleccionForm: FormGroup;
 
   constructor( private cursoService: CursoService,
                private busquedasSrv: BusquedasService,
                private modalImagenSrv: ModalImagenService,
+               private usuarioService: UsuarioService,
                private fb: FormBuilder){}
 
   ngOnInit(): void {
@@ -37,6 +39,9 @@ export class CursosComponent implements OnInit, OnDestroy{
       jornada: [ '0' , Validators.required ],
       nivel: [ '0', Validators.required ]
     });
+
+    this.nivelUsuario = this.usuarioService.role;
+    console.log(this.nivelUsuario);
   }
 
   ngOnDestroy(): void {
