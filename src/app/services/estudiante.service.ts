@@ -108,6 +108,12 @@ export class EstudianteService {
     return this.http.put(url, estudiante, this.headers );
   }
 
+  asignarEstudianteCurso( idEstudiante: string, idCurso: string)
+  {
+    const url = `${ base_url}/estudiantes/asignacion/${idEstudiante}`;
+    return this.http.put(url, { curso: idCurso} , this.headers );
+  }
+
   eliminarCliente( _id: string )
   {
     const url = `${ base_url}/clientes/${_id}`;

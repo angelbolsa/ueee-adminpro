@@ -81,28 +81,22 @@ export class AsignacionComponent implements OnInit {
 
 
   cargarEstudiante( id: string ){
-    if(id === 'nuevo'){
-      return;
-    }
 
     this.estudianteService.cargarEstudianteId(id)
         .subscribe( (estudiante: Estudiante) => {
 
           if( !estudiante ){
-            return this.router.navigateByUrl(`/dashboard/gestion/listados`);
+            return this.router.navigateByUrl(`/dashboard`);
           }
 
-          const { cedula, apellidos, nombres, f_nac, sexo
-                  
-           } = estudiante;
+          const { cedula, apellidos, nombres, f_nac, sexo } = estudiante;
 
           const fecha_nacimiento: string = formatDate(f_nac,'yyyy-MM-dd','EN');
 
           this.estudianteService.cargarMatriculaEstudiante(id)
           .subscribe( (matricula: Matricula) => {
+            
             this.matriculaEstudianteSeleccionado = matricula;
-            const { datosCurso } = matricula;
-
             const datosFormulario = {
               cedula,  
               apellidos, 
@@ -129,8 +123,13 @@ export class AsignacionComponent implements OnInit {
     this.cursos = [];
   }
 
-  guardarEstudiante(){
-  }
+  guardarMatricula(){
+    this.estudianteService.asignarEstudianteCurso(this.estudianteSeleccionado._id, 
+      this.asignacionForm.controls['cursoSeleccionado'].value)
+      .subscribe( resp => {
+        console.log(resp);
+      } )
+    }
 
   reset(){    
     this.asignacionForm.reset();

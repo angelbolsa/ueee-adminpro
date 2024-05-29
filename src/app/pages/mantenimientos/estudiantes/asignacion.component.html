@@ -7,7 +7,7 @@
             <div class="card-body">
                 <form class="form-horizontal p-t-20" 
                       [formGroup]="asignacionForm"
-                      (submit)="guardarEstudiante()">
+                      (submit)="guardarMatricula()">
 
                     <div class="form-body">
                         <h3 class="box-title">Información personal</h3>
@@ -27,8 +27,11 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Asignado a</label>
                                     <div class="col-md-9">
-                                        <p *ngIf="matriculaEstudianteSeleccionado" class="form-control-static">{{matriculaEstudianteSeleccionado.datosCurso.grado}} {{matriculaEstudianteSeleccionado.datosCurso.nivel}} "{{matriculaEstudianteSeleccionado.datosCurso.paralelo}}" {{matriculaEstudianteSeleccionado.datosCurso.especialidad}}</p>
-                                        <p *ngIf="matriculaEstudianteSeleccionado" class="form-control-static mt-1">JORNADA {{matriculaEstudianteSeleccionado.datosCurso.jornada}}</p>
+                                        <p *ngIf="matriculaEstudianteSeleccionado" class="form-control-static">
+                                            {{matriculaEstudianteSeleccionado.datosCurso.grado}} {{matriculaEstudianteSeleccionado.datosCurso.nivel}} "{{matriculaEstudianteSeleccionado.datosCurso.paralelo}}" {{matriculaEstudianteSeleccionado.datosCurso.especialidad}}
+                                            <span *ngIf="matriculaEstudianteSeleccionado.datosCurso.jornada=='VESPERTINA'" class="label label-danger">{{matriculaEstudianteSeleccionado.datosCurso.jornada}}</span>
+                                            <span *ngIf="matriculaEstudianteSeleccionado.datosCurso.jornada=='MATUTINA'" class="label label-info">{{matriculaEstudianteSeleccionado.datosCurso.jornada}}</span>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +156,6 @@
                                         <button type="submit" 
                                                 class="btn btn-success mr-1"
                                                 [disabled]="asignacionForm.invalid">Guardar</button>
-                                        <button type="button" class="btn btn-inverse" onclick="">Cancel</button>
                                     </div>
                                 </div>
                             </div>
