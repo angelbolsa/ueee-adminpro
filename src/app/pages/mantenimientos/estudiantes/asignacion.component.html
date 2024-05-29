@@ -6,120 +6,144 @@
             </div>
             <div class="card-body">
                 <form class="form-horizontal p-t-20" 
+                      [formGroup]="asignacionForm"
                       (submit)="guardarEstudiante()">
-                      <h3 class="box-title">Datos personales del estudiante</h3>
-                      <hr class="m-t-0 m-b-40">
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Cédula:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"></p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                      </div>
-                      <!--/row-->
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Apellidos:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> {{estudianteSeleccionado.apellidos}} </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Nombres:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> {{estudianteSeleccionado.nombres}} </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                      </div>
-                      <!--/row-->
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Fecha de nacimiento:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> {{estudianteSeleccionado.f_nac}} </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Sexo:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> 
-                                        <span *ngIf="estudianteSeleccionado.sexo=='0'" class="label label-danger">Mujer</span>
-                                        <span *ngIf="estudianteSeleccionado.sexo=='1'" class="label label-info">Hombre</span>
-                                      </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                      </div>
-                      <!--/row-->
-                      <h3 class="box-title">Address</h3>
-                      <hr class="m-t-0 m-b-40">
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Address:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> E104, Dharti-2, Near silverstar mall </p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">City:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> Bhavnagar </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">State:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> Gujarat </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                      </div>
-                      <!--/row-->
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Post Code:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> 457890 </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                          <div class="col-md-6">
-                              <div class="form-group row">
-                                  <label class="control-label text-right col-md-3">Country:</label>
-                                  <div class="col-md-9">
-                                      <p class="form-control-static"> India </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--/span-->
-                      </div>
-                  
+
+                    <div class="form-body">
+                        <h3 class="box-title">Información personal</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Cédula</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="cedula">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Asignado a</label>
+                                    <div class="col-md-9">
+                                        <p *ngIf="matriculaEstudianteSeleccionado" class="form-control-static">{{matriculaEstudianteSeleccionado.datosCurso.grado}} {{matriculaEstudianteSeleccionado.datosCurso.nivel}} "{{matriculaEstudianteSeleccionado.datosCurso.paralelo}}" {{matriculaEstudianteSeleccionado.datosCurso.especialidad}}</p>
+                                        <p *ngIf="matriculaEstudianteSeleccionado" class="form-control-static mt-1">JORNADA {{matriculaEstudianteSeleccionado.datosCurso.jornada}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Apellidos</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="apellidos">
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Nombres</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="nombres">
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Sexo</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control custom-select"
+                                                formControlName="sexo"
+                                                data-placeholder="--seleccione--">
+                                            <option value="">--seleccione--</option>
+                                            <option value="1">Hombre</option>
+                                            <option value="0">Mujer</option>
+                                        </select>
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Fecha de nacimiento</label>
+                                    <div class="col-md-9">
+                                        <input  type="date" 
+                                                class="form-control" 
+                                                placeholder="dd/mm/yyyy"
+                                                formControlName="f_nac">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title">Datos del curso</h3>
+                        <h4 class="box-title"></h4>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Jornada</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" 
+                                                formControlName="jornada"
+                                                (change)="cambiaJornada()">
+                                            <option selected value="0">Seleccione la jornada...</option>
+                                            <option value="1">MATUTINA</option>
+                                            <option value="2">VESPERTINA</option>
+                                            <option value="3">NOCTURNA</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Nivel</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" 
+                                                formControlName="nivel"
+                                                (change)="cargarCursos()">
+                                            <option selected value="0">Seleccione el nivel...</option>
+                                            <option value="1">EDUCACIÓN GENERAL BÁSICA</option>
+                                            <option value="2">BACHILLERATO GENERAL UNIFICADO</option>
+                                            <option value="3">BACHILLERATO TÉCNICO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Curso</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" 
+                                                formControlName="cursoSeleccionado">
+                                            <option selected [value]="0">Seleccione el curso...</option>
+                                            <option *ngFor="let curso of cursos"
+                                                    value="{{curso._id}}">
+                                                    {{curso.grado}} {{curso.nivel}} "{{curso.paralelo}}" {{curso.especialidad}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                    </div>
                     <hr>
                     <div class="form-actions">
                         <div class="row">
@@ -127,8 +151,9 @@
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
                                         <button type="submit" 
-                                                class="btn btn-success mr-1">Guardar</button>
-                                        <button type="button" class="btn btn-inverse" onclick="reset()">Cancel</button>
+                                                class="btn btn-success mr-1"
+                                                [disabled]="asignacionForm.invalid">Guardar</button>
+                                        <button type="button" class="btn btn-inverse" onclick="">Cancel</button>
                                     </div>
                                 </div>
                             </div>

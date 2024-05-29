@@ -10,6 +10,7 @@ import { Estudiante } from '../models/estudiante.model';
 import { CargarEstudiante } from '../interfaces/estudiante.interface';
 import { CargarEnrolamiento } from '../interfaces/enrolamiento.interface';
 import { Enrolamiento } from '../models/enrolamiento.model';
+import { Matricula } from '../models/matricula.model';
 
 const base_url = environment.base_url;
 
@@ -83,6 +84,17 @@ export class EstudianteService {
         map( (resp: {ok: boolean, estudiante: Estudiante}) => resp.estudiante )   
       )
   }
+
+  cargarMatriculaEstudiante( id: string )
+  {
+    const url = `${ base_url}/estudiantes/matricula/${ id }`;
+    return this.http.get(url, this.headers )
+      .pipe(
+        map( (resp: {ok: boolean, matricula: Matricula}) => resp.matricula[0] )   
+      )
+  }
+
+  
 
   crearEstudiante( estudiante: Estudiante )
   {
