@@ -23,7 +23,7 @@ export class AsignacionComponent implements OnInit {
 
   public asignacionForm: FormGroup;
   public estudianteSeleccionado: Estudiante;
-  public matriculaEstudianteSeleccionado: Matricula;
+  public datosAsignacion: any;
   public cursos: Curso[] = [];
 
   public imgSubs: Subscription;
@@ -40,7 +40,6 @@ export class AsignacionComponent implements OnInit {
     this.activatedRoute.params
         .subscribe( ({id}) => {
           this.cargarEstudiante(id);
-          this.cargarMatricula(id);
         } );
 
         window.scroll({
@@ -75,11 +74,6 @@ export class AsignacionComponent implements OnInit {
       })
     }
     
-    cargarMatricula( id: string ){
-      
-    }
-
-
   cargarEstudiante( id: string ){
 
     this.estudianteService.cargarEstudianteId(id)
@@ -95,23 +89,40 @@ export class AsignacionComponent implements OnInit {
 
           this.estudianteService.cargarMatriculaEstudiante(id)
           .subscribe( (matricula: Matricula) => {
-            
-            this.matriculaEstudianteSeleccionado = matricula;
-            const datosFormulario = {
-              cedula,  
-              apellidos, 
-              nombres, 
-              f_nac: fecha_nacimiento, 
-              sexo,
-              jornada: 0,
-              nivel: 0,
-              cursoSeleccionado: 0
-          }          
-            this.estudianteSeleccionado = estudiante;
-            this.asignacionForm.setValue(datosFormulario);
-    
-          });
 
+            if(matricula){
+              this.datosAsignacion = {
+                matriculaId: matricula._id,
+                grado: matricula.datosCurso.grado,
+                nivel: matricula.datosCurso.nivel,
+                paralelo: `"${matricula.datosCurso.paralelo}"`,
+                jornada: matricula.datosCurso.jornada,
+                especialidad: matricula.datosCurso.especialidad? matricula.datosCurso.especialidad : ''
+              };
+            }else{
+              this.datosAsignacion = {
+                matriculaId: '0',
+                grado: 'NO ASIGNADO',
+                nivel: '',
+                paralelo: '',
+                jornada: '',
+                especialidad: ''
+              };
+            }            
+          });
+          
+          const datosFormulario = {
+            cedula,  
+            apellidos, 
+            nombres, 
+            f_nac: fecha_nacimiento, 
+            sexo,
+            jornada: 0,
+            nivel: 0,
+            cursoSeleccionado: 0
+          }          
+          this.estudianteSeleccionado = estudiante;
+          this.asignacionForm.setValue(datosFormulario);
           return true;
 
         }
@@ -124,13 +135,18 @@ export class AsignacionComponent implements OnInit {
   }
 
   guardarMatricula(){
-    this.estudianteService.asignarEstudianteCurso(this.estudianteSeleccionado._id, 
-      this.asignacionForm.controls['cursoSeleccionado'].value)
-      .subscribe( resp => {
-        console.log(resp);
-      } )
-    }
 
+    if(this.asignacionForm.controls['cursoSeleccionado'].value!=0){
+      
+      this.estudianteService.asignarEstudianteCurso(this.estudianteSeleccionado._id, 
+        this.asignacionForm.controls['cursoSeleccionado'].value, this.datosAsignacion.matriculaId)
+        .subscribe( resp => {
+          Swal.fire('Asignado', `El estudiante ha sido asignado correctamente`, 'success');
+          this.router.navigateByUrl(`/dashboard/estudiantes/perfil`);
+        } )
+      }
+    }
+      
   reset(){    
     this.asignacionForm.reset();
   }

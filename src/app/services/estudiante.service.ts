@@ -94,8 +94,6 @@ export class EstudianteService {
       )
   }
 
-  
-
   crearEstudiante( estudiante: Estudiante )
   {
     const url = `${ base_url}/estudiantes`;
@@ -108,10 +106,10 @@ export class EstudianteService {
     return this.http.put(url, estudiante, this.headers );
   }
 
-  asignarEstudianteCurso( idEstudiante: string, idCurso: string)
+  asignarEstudianteCurso( idEstudiante: string, idCurso: string, idMatricula?:string)
   {
     const url = `${ base_url}/estudiantes/asignacion/${idEstudiante}`;
-    return this.http.put(url, { curso: idCurso} , this.headers );
+    return this.http.put(url, { curso: idCurso, matricula: idMatricula} , this.headers );
   }
 
   eliminarCliente( _id: string )
@@ -119,7 +117,6 @@ export class EstudianteService {
     const url = `${ base_url}/clientes/${_id}`;
     return this.http.delete(url, this.headers );
   }
-
 
 }
 
