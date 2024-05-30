@@ -41,7 +41,6 @@ export class CursosComponent implements OnInit, OnDestroy{
     });
 
     this.nivelUsuario = this.usuarioService.role;
-    console.log(this.nivelUsuario);
   }
 
   ngOnDestroy(): void {

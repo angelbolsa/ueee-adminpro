@@ -11,6 +11,7 @@ import { CursoService } from 'src/app/services/curso.service';
 import { Curso } from 'src/app/models/curso.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Estudiante } from 'src/app/models/estudiante.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-listados',
@@ -26,6 +27,7 @@ export class ListadosComponent implements OnInit, OnDestroy {
   public estudiantesListadoTemp: Enrolamiento[] = [];
   public cursos: Curso[] = [];
   public cursoSeleccionado: string;
+  public nivelUsuario;
 
   public desde: number = 0;
   public cargando: boolean = false;
@@ -41,7 +43,8 @@ export class ListadosComponent implements OnInit, OnDestroy {
                private estudianteService: EstudianteService,
                private cursoService: CursoService,
                private busquedasSrv: BusquedasService,
-               private modalImagenSrv: ModalImagenService){}
+               private modalImagenSrv: ModalImagenService,
+               private usuarioService: UsuarioService){}
 
   ngOnInit(): void {
 
@@ -50,6 +53,8 @@ export class ListadosComponent implements OnInit, OnDestroy {
         nivel: [ '0', Validators.required ],
         cursoSeleccionado: [ '0', Validators.required ]
       });
+
+      this.nivelUsuario = this.usuarioService.role;
   }
 
   ngOnDestroy(): void {

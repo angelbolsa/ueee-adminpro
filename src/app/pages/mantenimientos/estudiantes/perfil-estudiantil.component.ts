@@ -22,12 +22,15 @@ export class PerfilEstudiantilComponent implements OnInit, OnDestroy{
   public desde: number = 0;
   public cargando: boolean = false;
   public imgSubs: Subscription;
+  public nivelUsuario;
 
   constructor( private estudianteService: EstudianteService,
                private busquedasSrv: BusquedasService,
-               private modalImagenSrv: ModalImagenService){}
+               private modalImagenSrv: ModalImagenService,
+               private usuarioService: UsuarioService ){}
 
   ngOnInit(): void {
+    this.nivelUsuario = this.usuarioService.role;
   }
 
   ngOnDestroy(): void {
