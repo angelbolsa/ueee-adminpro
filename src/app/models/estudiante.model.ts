@@ -4,6 +4,21 @@ interface _EstudianteUsuario{
     img: string
 }
 
+interface _DatosMatricula{
+    datosCurso: _DatosCurso
+}
+
+interface _DatosCurso{
+    grado: string,
+    orden: number,
+    nivel: string,
+    nivel_abrev: string,
+    paralelo: string,
+    jornada: string,
+    especialidad?: string,
+    _id?: string
+}
+
 export class Estudiante{
     constructor(
         public cedula: string,
@@ -11,9 +26,10 @@ export class Estudiante{
         public nombres: string,
         public f_nac: string,
         public sexo: string,
-        public img: string,
-        public estado: string,
-        public usuario: _EstudianteUsuario,
+        public datosMatricula: _DatosMatricula,
+        public img?: string,
+        public estado?: string,
+        public usuario?: _EstudianteUsuario,
         public ciudad?: string,
         public direccion?: string,
         public celular?: string,
