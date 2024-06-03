@@ -67,6 +67,7 @@ export class PerfilEstudiantilComponent implements OnInit, OnDestroy{
 
     this.busquedasSrv.buscar('estudiantes', termino)
       .subscribe(
+        //es necesario reestructurar la data recibida
         (resp: Estudiante[]) => {
           this.estudiantes = resp;
         });

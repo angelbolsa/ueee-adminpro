@@ -26,7 +26,6 @@ export class Estudiante{
         public nombres: string,
         public f_nac: string,
         public sexo: string,
-        public datosMatricula: _DatosMatricula,
         public img?: string,
         public estado?: string,
         public usuario?: _EstudianteUsuario,
@@ -54,7 +53,8 @@ export class Estudiante{
         public padre_nombre_completo?: string,
         public padre_celular?: string,
         public padre_email?: string,
-        public _id?: string
+        public _id?: string,
+        public datosMatricula?: _DatosMatricula
     ){}
 }
 

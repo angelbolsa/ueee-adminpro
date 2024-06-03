@@ -36,9 +36,11 @@ export class BusquedasService {
     );
   }
 
-  private transformarEstudiantes( resultados: any[]): any[]{
+  private transformarEstudiantes( resultados: Estudiante[]): Estudiante[]{
     return resultados.map(
-      estudiante => new Estudiante(estudiante.cedula, estudiante.apellidos, estudiante.nombres, estudiante.f_nac, estudiante.sexo)
+      estudiante => new Estudiante(estudiante.cedula, estudiante.apellidos, estudiante.nombres, estudiante.f_nac, estudiante.sexo, '',
+        '', estudiante.usuario, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 
+        estudiante._id, estudiante.datosMatricula)
     );
   }
   
