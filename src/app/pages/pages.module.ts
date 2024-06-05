@@ -20,11 +20,13 @@ import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.com
 import { CursosComponent } from './mantenimientos/cursos/cursos.component';
 import { CursoComponent } from './mantenimientos/cursos/curso.component';
 import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-estudiantil.component';
+import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones.component';
 
 @NgModule({
   declarations: [
     AccountSettingsComponent,
     AsignacionComponent,
+    AsignacionesComponent,
     BusquedaComponent,
     CursoComponent,
     CursosComponent,

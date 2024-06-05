@@ -7,14 +7,15 @@ import { EstudianteService } from 'src/app/services/estudiante.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-perfil-estudiantil',
-  templateUrl: './perfil-estudiantil.component.html',
+  selector: 'app-asignaciones',
+  templateUrl: './asignaciones.component.html',
   styles: [
   ]
 })
 
-export class PerfilEstudiantilComponent implements OnInit, OnDestroy{
+export class AsignacionesComponent implements OnInit, OnDestroy{
 
   public totalEstudiantes: number;
   public estudiantes: Estudiante[] = [];
@@ -65,7 +66,7 @@ export class PerfilEstudiantilComponent implements OnInit, OnDestroy{
       return this.estudiantes = this.estudiantesTemp;
     }
 
-    this.busquedasSrv.buscar('estudiantes_matriculados', termino)
+    this.busquedasSrv.buscar('estudiantes_por_asignar', termino)
       .subscribe(
         //es necesario reestructurar la data recibida
         (resp: Estudiante[]) => {

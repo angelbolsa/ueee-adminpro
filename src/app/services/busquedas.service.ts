@@ -50,7 +50,7 @@ export class BusquedasService {
       return this.http.get(url, this.headers )
   }
 
-  buscar( tipo: 'usuarios'|'estudiantes'|'temas', termino: string){
+  buscar( tipo: 'usuarios'|'estudiantes_por_asignar'|'estudiantes_matriculados'|'temas', termino: string){
     const url = `${base_url}/busqueda/${ tipo }/${termino}`;
     return this.http.get<any[]>(url, this.headers )
       .pipe( 
@@ -60,8 +60,10 @@ export class BusquedasService {
           switch (tipo) {
             case 'usuarios':
               return this.transformarUsuarios(resp.data);
-            case 'estudiantes':
+            case 'estudiantes_por_asignar':
               return this.transformarEstudiantes(resp.data);             
+            case 'estudiantes_matriculados':
+              return this.transformarEstudiantes(resp.data);  
             default:
               return[];
           }
