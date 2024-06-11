@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, delay } from 'rxjs';
 
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
+
 import { Usuario } from 'src/app/models/usuario.model';
 
 import { BusquedasService } from 'src/app/services/busquedas.service';
@@ -99,6 +105,20 @@ export class ListadosComponent implements OnInit, OnDestroy {
 
   eliminarEstudiante(enrolamiento: Enrolamiento){
 
+  }
+
+  generarPDF(){
+    PdfMakeWrapper.setFonts(pdfFonts);
+
+    const pdf = new PdfMakeWrapper();
+
+    console.log(this.estudiantesListado);
+    
+    pdf.add(this.estudiantesListado.values['cedula']);
+
+    
+    
+    pdf.create().open();
   }
 
   abrirModal(usuario: Usuario){

@@ -1,0 +1,4 @@
+PDFMAKE
+npm i pdfmake@0.1.68
+solo disponible para version 0.1.x
+pm i pdfmake-wrapper
