@@ -78,8 +78,6 @@
     </div>
 </div>
 
-<button (click)="generarPDF()">Generar Listado</button>
-
 <div class="row" *ngIf="!cargando">
     <div class="col-12">
         <div class="card">
@@ -88,7 +86,17 @@
                     <div class="col-12">
                         <h5 class="card-title" *ngIf="cursoSeleccionado">Total de estudiantes en {{cursoSeleccionado}} ({{totalEstudiantes}})
                         </h5>
-                        <h6 class="card-subtitle">Estudiantes registrados en el curso seleccionado</h6>    
+                        <h6 class="card-subtitle">Estudiantes registrados en el curso seleccionado</h6>
+                        <div *ngIf="cursoSeleccionado" class="row">
+                            <div class="col">
+                                <div class="text-right text-white mb-3">
+                                    <a class="btn btn-primary" (click)="generarPDF()">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        Listado PDF
+                                    </a>
+                                </div>    
+                            </div>
+                         </div>  
                     </div>
                     <!-- <div class="col mb-4">
                         <div class="text-right">

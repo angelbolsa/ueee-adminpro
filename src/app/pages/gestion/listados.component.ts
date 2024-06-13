@@ -3,7 +3,9 @@ import { Subscription, delay } from 'rxjs';
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import { Img, PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
+import { ITable } from 'pdfmake-wrapper';
+
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -18,6 +20,9 @@ import { Curso } from 'src/app/models/curso.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Estudiante } from 'src/app/models/estudiante.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { ThisReceiver } from '@angular/compiler';
+
+type TableRow = [string, string, string];
 
 @Component({
   selector: 'app-listados',
@@ -25,6 +30,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styles: [
   ]
 })
+
 
 export class ListadosComponent implements OnInit, OnDestroy {
   
@@ -43,6 +49,8 @@ export class ListadosComponent implements OnInit, OnDestroy {
   public nivel: string;
 
   public seleccionForm: FormGroup;
+
+  
 
   constructor( 
                private fb: FormBuilder,
@@ -107,18 +115,55 @@ export class ListadosComponent implements OnInit, OnDestroy {
 
   }
 
-  generarPDF(){
+  async generarPDF(){
     PdfMakeWrapper.setFonts(pdfFonts);
-
     const pdf = new PdfMakeWrapper();
+    
+    pdf.add(
+      // Adding format to text
+      new Txt('UNIDAD EDUCATIVA EL EMPALME').alignment('center').bold().end  
+    );
+    pdf.add(
+      // Adding format to text
+      new Txt('LISTADO DE ESTUDIANTES').alignment('center').bold().end  
+    );
 
-    console.log(this.estudiantesListado);
-    
-    pdf.add(this.estudiantesListado.values['cedula']);
+    pdf.add(
+      // Adding format to text
+      new Txt('CURSO: ' + this.cursoSeleccionado).alignment('center').bold().end     
+    );
 
-    
-    
+    pdf.add(this.createTable(this.estudiantesListado));
     pdf.create().open();
+
+  }
+
+  createTable(data: Enrolamiento[]): ITable{
+    return new Table([
+      ['CEDULA', 'APELLIDOS', 'NOMBRES'],
+      ...this.extractData(data)
+    ])
+    .widths([100, '*', '*'])
+      .heights((rowIndex) => (rowIndex === 0 ? 25 : 0))
+      .layout({
+        fillColor: (rowIndex) => {
+          // row 0 is the header
+          if (rowIndex === 0) {
+            return '#6096ba';
+          }
+
+          return '#ffffff';
+        },
+        hLineColor: () => '#8b8c89',
+        vLineWidth: () => 0,
+      })
+      .end;
+  }
+
+  extractData(data: Enrolamiento[]): TableRow[]{
+    return data.map(
+      row => [row.estudiante.cedula, row.estudiante.apellidos, row.estudiante.nombres ]
+    );
   }
 
   abrirModal(usuario: Usuario){
