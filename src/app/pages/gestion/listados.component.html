@@ -83,37 +83,24 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-8">
                         <h5 class="card-title" *ngIf="cursoSeleccionado">Total de estudiantes en {{cursoSeleccionado}} ({{totalEstudiantes}})
                         </h5>
-                        <h6 class="card-subtitle">Estudiantes registrados en el curso seleccionado</h6>
-                        <div *ngIf="cursoSeleccionado" class="row">
-                            <div class="col">
-                                <div class="text-right text-white mb-1">
-                                    <a class="btn btn-danger mr-1" (click)="generarPDF()">
-                                        <i class="fa fa-file-pdf-o"></i>
-                                        Listado PDF
-                                    </a>
-                                    <a class="btn btn-success" (click)="generarXlsx()">
-                                        <i class="fa fa-file-excel-o"></i>
-                                        Listado EXCEL
-                                    </a>
-                                </div>    
-                            </div>
-                         </div>    
+                        <h6 class="card-subtitle">Estudiantes registrados en el curso seleccionado</h6> 
                     </div>
-                    <!-- <div class="col mb-4">
-                        <div class="text-right">
-                            <a class="btn btn-primary"
-                             routerLink="/dashboard/estudiantes/nuevo">
-                                <i class="fa fa-user-o"></i>
-                                Registrar estudiante
+                    <div *ngIf="cursoSeleccionado" class="col-4 mb-2">
+                        <div class="text-right text-white mb-1">
+                            <a class="btn btn-danger mr-1" (click)="generarPDF()">
+                                <i class="fa fa-file-pdf-o"></i>
                             </a>
-                        </div>    
-                    </div> -->
+                            <a class="btn btn-success" (click)="generarXlsx()">
+                                <i class="fa fa-file-excel-o"></i>
+                            </a>
+                        </div>        
+                    </div>
                  </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered .full-color-table .full-purple-table .hover-tabl" id="tabla-datos">
+                    <table class="table table-bordered .full-color-table .full-purple-table .hover-tabl">
                         <thead>
                             <tr>
                                 <th>No</th>

@@ -22,6 +22,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Estudiante } from 'src/app/models/estudiante.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ThisReceiver } from '@angular/compiler';
+import { environment } from 'src/environments/environment';
 
 type TableRow = [number, string, string, string];
 
@@ -76,26 +77,29 @@ export class ListadosComponent implements OnInit, OnDestroy {
   }
 
   cargarEstudiantesPorCurso(){
-    this.cargando = true;
-    const curso = this.seleccionForm.get('cursoSeleccionado').value;
-    this.cursoService.cargarCursoPorID(curso)
-      .subscribe(
-        (curso) => {
-          this.cursoSeleccionado = `${curso.grado} ${curso.nivel} PARALELO "${curso.paralelo}"`;
-          if(curso.especialidad){
-            this.cursoSeleccionado = this.cursoSeleccionado + ` ESPECIALIDAD ${curso.especialidad}`
-          }
-          this.cursoSeleccionado = this.cursoSeleccionado + ` JORNADA ${curso.jornada}`
-        } 
-      );
-    this.estudianteService.cargarEstudiantesPorCurso(curso)
-      .subscribe(
-        ({total, enrolamientos}) =>{
-          this.totalEstudiantes = total;
-          this.estudiantesListado = enrolamientos;
-          this.estudiantesListadoTemp = enrolamientos;
-          this.cargando = false;
-        })
+    
+    if(this.seleccionForm.get('cursoSeleccionado').value != 0){
+      this.cargando = true;
+      const curso = this.seleccionForm.get('cursoSeleccionado').value;
+      this.cursoService.cargarCursoPorID(curso)
+        .subscribe(
+          (curso) => {
+            this.cursoSeleccionado = `${curso.grado} ${curso.nivel} PARALELO "${curso.paralelo}"`;
+            if(curso.especialidad){
+              this.cursoSeleccionado = this.cursoSeleccionado + ` ESPECIALIDAD ${curso.especialidad}`
+            }
+            this.cursoSeleccionado = this.cursoSeleccionado + ` JORNADA ${curso.jornada}`
+          } 
+        );
+      this.estudianteService.cargarEstudiantesPorCurso(curso)
+        .subscribe(
+          ({total, enrolamientos}) =>{
+            this.totalEstudiantes = total;
+            this.estudiantesListado = enrolamientos;
+            this.estudiantesListadoTemp = enrolamientos;
+            this.cargando = false;
+          })
+    }
   }
   
   cargarCursos(){
@@ -119,8 +123,16 @@ export class ListadosComponent implements OnInit, OnDestroy {
   generarXlsx(){
     var filename = `${this.cursoSeleccionado.toString()}.xlsx`;
 
-    let data = document.getElementById("tabla-datos");
-    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+    const rows = this.estudiantesListado.map(
+      row => ({
+        cedula: row.estudiante.cedula,
+        estudiante: `${row.estudiante.apellidos} ${row.estudiante.nombres}`,
+        f_nac: row.estudiante.f_nac,
+        sexo: row.estudiante.sexo == 1 ? 'Hombre' : 'Mujer'
+      })
+    );
+
+    const ws:XLSX.WorkSheet = XLSX.utils.json_to_sheet(rows);
     const wb:XLSX.WorkBook = XLSX.utils.book_new();
     
     XLSX.utils.book_append_sheet(wb, ws, 'Listado');
@@ -135,30 +147,45 @@ export class ListadosComponent implements OnInit, OnDestroy {
     pdf.add(
       await new Img('https://res.cloudinary.com/aabsolutions/image/upload/v1718313531/ueee/assets/t2j6vxwpehf7afvbdgv9.png')
       .width(500)
-      .height(80)
+      .height(70)
       .build()
     );
     pdf.add(
       new Txt('UNIDAD EDUCATIVA EL EMPALME')
-        .fontSize(15)
+        .fontSize(16)
         .alignment('center')
         .bold().end  
     );
     pdf.add(
-      new Txt('LISTADO DE ESTUDIANTES')
-        .fontSize(14)
+      new Txt('EL EMPALME - GUAYAS - ECUADOR')
+        .fontSize(12)
+        .alignment('center')
+        .bold().end  
+    );
+    pdf.add(
+      new Txt('DISTRITO 09D15-EMPALME - CÓDIGO AMIE: 09H03803')
+        .fontSize(10)
+        .alignment('center')
+        .bold().end  
+    );
+    pdf.add(
+      new Txt('LISTADO DE ESTUDIANTES PERIODO LECTIVO' + environment.periodo_activo)
+        .fontSize(13)
         .alignment('center')
         .bold().end 
     );
     pdf.add(
+      pdf.ln(1)
+    );
+    pdf.add(
       new Txt('CURSO: ' + this.cursoSeleccionado)
-        .fontSize(12)
+        .fontSize(11)
         .alignment('left')
         .bold().end 
     );
     pdf.add(
       pdf.ln(1)
-    )
+    );
     pdf.add(
       this.createTable(this.estudiantesListado)
     );
@@ -175,7 +202,7 @@ export class ListadosComponent implements OnInit, OnDestroy {
         new Txt('NOMBRES').alignment('center').bold().end
       ],
       ...this.extractData(data)
-    ])
+    ]).fontSize(10)
     .widths([20,100, '*', '*'])
       .heights((rowIndex) => (rowIndex === 0 ? 15 : 0))
       .layout({
