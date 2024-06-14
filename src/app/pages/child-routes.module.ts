@@ -16,6 +16,7 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { AdminGuard } from '../guards/admin.guard';
 import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
 import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones.component';
+import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { titulo: 'Dashboard' }, },
@@ -44,6 +45,7 @@ const childRoutes: Routes = [
   //Rutas protegidas para admin
     
   { path:'usuarios', canActivate: [AdminGuard] ,component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios' } },
+  { path:'registro', canActivate: [AdminGuard] ,component: RegistroComponent, data: { titulo: 'Registro de usuario' } },
 
 
 

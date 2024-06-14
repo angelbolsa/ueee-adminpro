@@ -21,6 +21,7 @@ import { CursosComponent } from './mantenimientos/cursos/cursos.component';
 import { CursoComponent } from './mantenimientos/cursos/curso.component';
 import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-estudiantil.component';
 import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones.component';
+import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones
     PagesComponent,
     PerfilComponent,
     PerfilEstudiantilComponent,
+    RegistroComponent,
     TitulacionComponent,
     UsuariosComponent
   ],
