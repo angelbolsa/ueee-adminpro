@@ -89,14 +89,18 @@
                         <h6 class="card-subtitle">Estudiantes registrados en el curso seleccionado</h6>
                         <div *ngIf="cursoSeleccionado" class="row">
                             <div class="col">
-                                <div class="text-right text-white mb-3">
-                                    <a class="btn btn-primary" (click)="generarPDF()">
+                                <div class="text-right text-white mb-1">
+                                    <a class="btn btn-danger mr-1" (click)="generarPDF()">
                                         <i class="fa fa-file-pdf-o"></i>
                                         Listado PDF
                                     </a>
+                                    <a class="btn btn-success" (click)="generarXlsx()">
+                                        <i class="fa fa-file-excel-o"></i>
+                                        Listado EXCEL
+                                    </a>
                                 </div>    
                             </div>
-                         </div>  
+                         </div>    
                     </div>
                     <!-- <div class="col mb-4">
                         <div class="text-right">
@@ -109,7 +113,7 @@
                     </div> -->
                  </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered .full-color-table .full-purple-table .hover-tabl">
+                    <table class="table table-bordered .full-color-table .full-purple-table .hover-tabl" id="tabla-datos">
                         <thead>
                             <tr>
                                 <th>No</th>

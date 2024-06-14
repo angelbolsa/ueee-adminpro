@@ -5,6 +5,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Img, PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
 import { ITable } from 'pdfmake-wrapper';
+import * as XLSX from "xlsx";
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -22,7 +23,7 @@ import { Estudiante } from 'src/app/models/estudiante.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ThisReceiver } from '@angular/compiler';
 
-type TableRow = [string, string, string];
+type TableRow = [number, string, string, string];
 
 @Component({
   selector: 'app-listados',
@@ -115,41 +116,73 @@ export class ListadosComponent implements OnInit, OnDestroy {
 
   }
 
+  generarXlsx(){
+    var filename = `${this.cursoSeleccionado.toString()}.xlsx`;
+
+    let data = document.getElementById("tabla-datos");
+    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+    const wb:XLSX.WorkBook = XLSX.utils.book_new();
+    
+    XLSX.utils.book_append_sheet(wb, ws, 'Listado');
+    XLSX.writeFile(wb, filename);
+    
+  }
+
   async generarPDF(){
     PdfMakeWrapper.setFonts(pdfFonts);
     const pdf = new PdfMakeWrapper();
     
     pdf.add(
-      // Adding format to text
-      new Txt('UNIDAD EDUCATIVA EL EMPALME').alignment('center').bold().end  
+      await new Img('https://res.cloudinary.com/aabsolutions/image/upload/v1718313531/ueee/assets/t2j6vxwpehf7afvbdgv9.png')
+      .width(500)
+      .height(80)
+      .build()
     );
     pdf.add(
-      // Adding format to text
-      new Txt('LISTADO DE ESTUDIANTES').alignment('center').bold().end  
+      new Txt('UNIDAD EDUCATIVA EL EMPALME')
+        .fontSize(15)
+        .alignment('center')
+        .bold().end  
     );
-
     pdf.add(
-      // Adding format to text
-      new Txt('CURSO: ' + this.cursoSeleccionado).alignment('center').bold().end     
+      new Txt('LISTADO DE ESTUDIANTES')
+        .fontSize(14)
+        .alignment('center')
+        .bold().end 
     );
-
-    pdf.add(this.createTable(this.estudiantesListado));
+    pdf.add(
+      new Txt('CURSO: ' + this.cursoSeleccionado)
+        .fontSize(12)
+        .alignment('left')
+        .bold().end 
+    );
+    pdf.add(
+      pdf.ln(1)
+    )
+    pdf.add(
+      this.createTable(this.estudiantesListado)
+    );
     pdf.create().open();
 
   }
 
   createTable(data: Enrolamiento[]): ITable{
     return new Table([
-      ['CEDULA', 'APELLIDOS', 'NOMBRES'],
+      [
+        new Txt('No').alignment('center').bold().end,
+        new Txt('IDENTIFICACIÓN').alignment('center').bold().end,
+        new Txt('APELLIDOS').alignment('center').bold().end,
+        new Txt('NOMBRES').alignment('center').bold().end
+      ],
       ...this.extractData(data)
     ])
-    .widths([100, '*', '*'])
-      .heights((rowIndex) => (rowIndex === 0 ? 25 : 0))
+    .widths([20,100, '*', '*'])
+      .heights((rowIndex) => (rowIndex === 0 ? 15 : 0))
       .layout({
         fillColor: (rowIndex) => {
           // row 0 is the header
           if (rowIndex === 0) {
-            return '#6096ba';
+            return '#3fb4fc';
           }
 
           return '#ffffff';
@@ -161,8 +194,9 @@ export class ListadosComponent implements OnInit, OnDestroy {
   }
 
   extractData(data: Enrolamiento[]): TableRow[]{
+    var i = 1;
     return data.map(
-      row => [row.estudiante.cedula, row.estudiante.apellidos, row.estudiante.nombres ]
+      row => [i++, row.estudiante.cedula, row.estudiante.apellidos, row.estudiante.nombres ]
     );
   }
 
