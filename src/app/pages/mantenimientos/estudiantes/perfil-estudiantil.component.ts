@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, delay } from 'rxjs';
+import { Subscription, debounceTime, delay } from 'rxjs';
 import { Estudiante } from 'src/app/models/estudiante.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
@@ -66,52 +66,14 @@ export class PerfilEstudiantilComponent implements OnInit, OnDestroy{
     }
 
     this.busquedasSrv.buscar('estudiantes_matriculados', termino)
+      .pipe(
+        debounceTime(300)
+      )
       .subscribe(
         //es necesario reestructurar la data recibida
         (resp: Estudiante[]) => {
           this.estudiantes = resp;
         });
       return true;
-  }
-
-  eliminarUsuario(usuario: Usuario){
-
-    // if(usuario.uid===this.usuService.uid){
-    //   return Swal.fire('Error', 'No puede borrarse a sí mismo','error');
-    // }
-
-    // Swal.fire({
-    //   title: '¿Está seguro de eliminar el usuario?',
-    //   text: `Está a punto de borrar a ${ usuario.nombre }`,
-    //   icon: 'question',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#3085d6',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Sí, elimínalo!'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.usuService.eliminarUsuario(usuario)
-    //       .subscribe( resp => {
-    //         this.cargarUsuarios();
-    //         Swal.fire(
-    //           'Usuario borrado.',
-    //           `${ usuario.nombre } fue eliminado corréctamente`,
-    //           'success'
-    //         )
-    //       })  
-    //   }
-    // })
-    // return true;
-  }
-
-  cambiarRole( usuario: Usuario){
-    // this.usuService.guardarUsuario(usuario)
-    //   .subscribe(
-        
-    //   )
-  }
-
-  abrirModal(usuario: Usuario){
-    // this.modalImagenSrv.abrirModal('usuarios', usuario.uid, usuario.img);
   }
 }

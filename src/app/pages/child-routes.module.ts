@@ -17,6 +17,7 @@ import { AdminGuard } from '../guards/admin.guard';
 import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.component';
 import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones.component';
 import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
+import { OfertaComponent } from './mantenimientos/cursos/oferta.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { titulo: 'Dashboard' }, },
@@ -40,6 +41,7 @@ const childRoutes: Routes = [
 
   //Rutas de cursos
   { path:'cursos', component: CursosComponent, data: { titulo: 'Administración de cursos' } },
+  { path:'cursos/oferta', component: OfertaComponent, data: { titulo: 'Información de oferta educativa' } },
   { path:'curso/:id', component: CursoComponent, data: { titulo: 'Administración de información de curso' } },
   
   //Rutas protegidas para admin

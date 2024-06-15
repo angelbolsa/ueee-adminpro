@@ -58,12 +58,6 @@
                                 <td class="text-nowrap text-center">
                                     <a [routerLink]="['/dashboard/estudiantes', estudiante._id]" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                     <a *ngIf="nivelUsuario=='ADMIN_ROLE'" [routerLink]="['/dashboard/estudiantes/asignacion', estudiante._id]" fragment="top-perfil" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-address-book text-inverse m-r-10"></i> </a>
-                                    <!-- <a data-toggle="tooltip" 
-                                        data-original-title="Close"
-                                        (click)="eliminarUsuario(usuario)"
-                                        class="cursor"> 
-                                        <i class="fa fa-close text-danger"></i> 
-                                    </a> -->
                                 </td>
                             </tr>
                         </tbody>

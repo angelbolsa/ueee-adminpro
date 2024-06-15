@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, delay } from 'rxjs';
+import { Subscription, debounceTime, delay } from 'rxjs';
 import { Estudiante } from 'src/app/models/estudiante.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
@@ -67,6 +67,9 @@ export class AsignacionesComponent implements OnInit, OnDestroy{
     }
 
     this.busquedasSrv.buscar('estudiantes_por_asignar', termino)
+      .pipe(
+        debounceTime(300)
+      )
       .subscribe(
         //es necesario reestructurar la data recibida
         (resp: Estudiante[]) => {

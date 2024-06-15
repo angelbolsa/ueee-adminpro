@@ -44,6 +44,16 @@ export class CursoService {
     
   }
 
+  cargarOfertaActiva(){
+    const url = `${ base_url}/cursos/oferta`;
+
+    return this.http.get(url, this.headers )
+    .pipe(
+      map( (resp: any) => resp.oferta )   
+    )
+    
+  }
+
   cargarCursosFiltrados(jornada: number = 0, nivel: number = 0)
   {
     const url = `${ base_url}/cursos/listado/filtro?jor=${jornada}&niv=${nivel}`;
