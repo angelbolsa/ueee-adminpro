@@ -1,57 +1,32 @@
-<div class="row">
-  <div class="col-md-6">
-      <div class="card">
-          <div class="card-body">
-              <h4 class="card-title">Vertical Tab</h4>
-              <h6 class="card-subtitle">Use default tab with class</h6>
-              <!-- Nav tabs -->
-              <div class="vtabs">
-                  <ul class="nav nav-tabs tabs-vertical" role="tablist">
-                      <li class="nav-item"> 
-                        <a class="nav-link" data-toggle="tab" href="#8vomat" role="tab" aria-expanded="true">
-                          <span class="hidden-sm-up"><i class="ti-home"></i></span> 
-                          <span class="hidden-xs-down">8VO EGB</span> 
-                        </a> 
-                      </li>
-                      <li class="nav-item"> 
-                        <a class="nav-link" data-toggle="tab" href="#9nomat" role="tab" aria-expanded="false">
-                          <span class="hidden-sm-up"><i class="ti-home"></i></span> 
-                          <span class="hidden-xs-down">9NO EGB</span> 
-                        </a> 
-                      </li>
-                      <li class="nav-item"> 
-                        <a class="nav-link" data-toggle="tab" href="#10momat" role="tab" aria-expanded="false">
-                          <span class="hidden-sm-up"><i class="ti-home"></i></span> 
-                          <span class="hidden-xs-down">10MO EGB</span> 
-                        </a> 
-                      </li>
-                      <li class="nav-item"> 
-                        <a class="nav-link" data-toggle="tab" href="#1robachmat" role="tab" aria-expanded="false">
-                          <span class="hidden-sm-up"><i class="ti-home"></i></span> 
-                          <span class="hidden-xs-down">1RO BACH</span> 
-                        </a> 
-                      </li>
-                      <li class="nav-item"> 
-                        <a class="nav-link" data-toggle="tab" href="#2dobach" role="tab" aria-expanded="false">
-                          <span class="hidden-sm-up"><i class="ti-home"></i></span> 
-                          <span class="hidden-xs-down">2DO BACH</span> 
-                        </a> 
-                      </li>
-                      <li class="nav-item"> 
-                        <a class="nav-link" data-toggle="tab" href="#3robach" role="tab" aria-expanded="false">
-                          <span class="hidden-sm-up"><i class="ti-home"></i></span> 
-                          <span class="hidden-xs-down">3RO BACH</span> 
-                        </a> 
-                      </li>
-                  </ul>
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                      <div *ngIf="ofertaActiva" class="tab-pane active" id="8vomat" role="tabpanel" aria-expanded="true">
-                          
-                      </div>
-                  </div>
-              </div>
-          </div>
+<div class="card">
+  <div class="card-body">
+      <h4 class="card-title">Oferta educativa</h4>
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Grado</th>
+                      <th>Nivel</th>
+                      <th>Paralelo</th>
+                      <th>Especialidad</th>
+                      <th>Jornada</th>
+                      <th>Estudiantes</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let oferta of ofertaActiva; index as i">
+                      <td>{{i+1}}</td>
+                      <td>{{oferta.result.grado_abrev}}</td>
+                      <td>{{oferta.result.nivel_abrev}}</td>
+                      <td>{{oferta.result.paralelo}}</td>
+                      <td>{{oferta.result.especialidad}}</td>
+                      <td *ngIf="oferta.result.jornada=='MATUTINA'"><span class="label label-primary">Matutina</span> </td>
+                      <td *ngIf="oferta.result.jornada=='VESPERTINA'"><span class="label label-danger">Vespertina</span> </td>
+                      <td>{{oferta.estudiantes}}</td>
+                  </tr>
+              </tbody>
+          </table>
       </div>
   </div>
 </div>

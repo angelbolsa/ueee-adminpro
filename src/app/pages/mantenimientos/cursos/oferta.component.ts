@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { CursoService } from 'src/app/services/curso.service';
-
-
 
 @Component({
   selector: 'app-oferta',
@@ -20,9 +19,8 @@ export class OfertaComponent implements OnInit {
   cargarOfertaActiva(){
     this._cursoService.cargarOfertaActiva()
       .subscribe(
-        oferta => {
-          this.ofertaActiva = oferta;
-          console.log(this.ofertaActiva);
+        (oferta) => {
+          this.ofertaActiva = oferta
         }
       )
   }

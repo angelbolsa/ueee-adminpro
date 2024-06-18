@@ -22,6 +22,7 @@ import { CursoComponent } from './mantenimientos/cursos/curso.component';
 import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-estudiantil.component';
 import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones.component';
 import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
+import { OfertaComponent } from './mantenimientos/cursos/oferta.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { RegistroComponent } from './mantenimientos/usuarios/registro.component'
     DashboardComponent,
     EstudianteComponent,
     ListadosComponent,
+    OfertaComponent,
     PagesComponent,
     PerfilComponent,
     PerfilEstudiantilComponent,
