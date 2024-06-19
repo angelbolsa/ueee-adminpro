@@ -1,8 +1,8 @@
 <div class="card">
   <div class="card-body">
       <h4 class="card-title">Oferta educativa</h4>
-      <div class="table-responsive">
-          <table class="table">
+      <div class="table responsive">
+          <table class="table table-hover">
               <thead>
                   <tr>
                       <th>#</th>
@@ -21,7 +21,7 @@
                       <td>{{oferta.result.nivel_abrev}}</td>
                       <td>{{oferta.result.paralelo}}</td>
                       <td>{{oferta.result.especialidad}}</td>
-                      <td *ngIf="oferta.result.jornada=='MATUTINA'"><span class="label label-primary">Matutina</span> </td>
+                      <td *ngIf="oferta.result.jornada=='MATUTINA'"><span class="label label-info">Matutina</span> </td>
                       <td *ngIf="oferta.result.jornada=='VESPERTINA'"><span class="label label-danger">Vespertina</span> </td>
                       <td>{{oferta.estudiantes}}</td>
                   </tr>
