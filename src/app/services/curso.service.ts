@@ -12,6 +12,7 @@ import { CargarEnrolamiento } from '../interfaces/enrolamiento.interface';
 import { Enrolamiento } from '../models/enrolamiento.model';
 import { CargarCurso } from '../interfaces/curso.interface';
 import { Curso } from '../models/curso.model';
+import { TotalesOferta } from '../interfaces/totalesOferta.interface';
 
 const base_url = environment.base_url;
 
@@ -44,14 +45,29 @@ export class CursoService {
     
   }
 
-  cargarOfertaActiva(){
-    const url = `${ base_url}/cursos/oferta`;
+  cargarOfertaActiva(jornada: string){
+    const url = `${ base_url}/cursos/oferta/${jornada}`;
 
     return this.http.get(url, this.headers )
     .pipe(
       map( (resp: any) => resp.oferta )   
     )
     
+  }
+
+  cargarTotalesOfertaActiva(jornada: string){
+    const url = `${ base_url}/cursos/oferta/totales/${jornada}`;
+
+    return this.http.get<TotalesOferta>(url, this.headers )
+    .pipe(
+      map( resp => {
+        return {
+          totalCursos: resp.totalCursos,
+          totalEstudiantes: resp.totalEstudiantes
+        }
+      }
+      )
+    )
   }
 
   cargarCursosFiltrados(jornada: number = 0, nivel: number = 0)

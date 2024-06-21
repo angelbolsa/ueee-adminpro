@@ -1,32 +1,113 @@
-<div class="card">
-  <div class="card-body">
-      <h4 class="card-title">Oferta educativa</h4>
-      <div class="table responsive">
-          <table class="table table-hover">
-              <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>Grado</th>
-                      <th>Nivel</th>
-                      <th>Paralelo</th>
-                      <th>Especialidad</th>
-                      <th>Jornada</th>
-                      <th>Estudiantes</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let oferta of ofertaActiva; index as i">
-                      <td>{{i+1}}</td>
-                      <td>{{oferta.result.grado_abrev}}</td>
-                      <td>{{oferta.result.nivel_abrev}}</td>
-                      <td>{{oferta.result.paralelo}}</td>
-                      <td>{{oferta.result.especialidad}}</td>
-                      <td *ngIf="oferta.result.jornada=='MATUTINA'"><span class="label label-info">Matutina</span> </td>
-                      <td *ngIf="oferta.result.jornada=='VESPERTINA'"><span class="label label-danger">Vespertina</span> </td>
-                      <td>{{oferta.estudiantes}}</td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-  </div>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card bg-info">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/courses-w.png" alt="Income"></div>
+                    <div class="align-self-center">
+                        <h6 class="text-white m-t-10 m-b-0">Total Cursos</h6>
+                        <h2 class="m-t-0 text-white">{{totalCursoMatutina}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card bg-info">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/students-w.png" alt="Income"></div>
+                    <div class="align-self-center">
+                        <h6 class="text-white m-t-10 m-b-0">Total Estudiantes</h6>
+                        <h2 class="m-t-0 text-white">{{totalEstudiantesMatutina}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/courses-w.png" alt="Income"></div>
+                    <div class="align-self-center">
+                        <h6 class="text-white m-t-10 m-b-0">Total Cursos</h6>
+                        <h2 class="m-t-0 text-white">{{totalCursoVespertina}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/students-w.png" alt="Income"></div>
+                    <div class="align-self-center">
+                        <h6 class="text-white m-t-10 m-b-0">Total Estudiantes</h6>
+                        <h2 class="m-t-0 text-white">{{totalEstudiantesVespertina}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Jornada Matutina {{periodoActivo}}</h4>
+                <div class="table responsive">
+                    <table class="table color-table table-hover info-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Grado</th>
+                                <th>Paralelo</th>
+                                <th>Especialidad</th>
+                                <th>Estudiantes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let oferta of ofertaActivaMatutina; index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{oferta.result.grado_abrev}} {{oferta.result.nivel_abrev}}</td>
+                                <td>{{oferta.result.paralelo}}</td>
+                                <td>{{oferta.result.especialidad}}</td>
+                                <td><span class="label label-info">{{oferta.estudiantes}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          </div>  
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Jornada Vespertina {{periodoActivo}}</h4>
+                    <div class="table responsive">
+                        <table class="table color-table table-hover danger-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Grado</th>
+                                    <th>Paralelo</th>
+                                    <th>Especialidad</th>
+                                    <th>Estudiantes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let oferta of ofertaActivaVespertina; index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{oferta.result.grado_abrev}} {{oferta.result.nivel_abrev}}</td>
+                                    <td>{{oferta.result.paralelo}}</td>
+                                    <td>{{oferta.result.especialidad}}</td>
+                                    <td><span class="label label-danger">{{oferta.estudiantes}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
 </div>
