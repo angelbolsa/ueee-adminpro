@@ -18,6 +18,7 @@ import { AsignacionComponent } from './mantenimientos/estudiantes/asignacion.com
 import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones.component';
 import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
 import { OfertaComponent } from './mantenimientos/cursos/oferta.component';
+import { ImcComponent } from './mantenimientos/estudiantes/imc.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { titulo: 'Dashboard' }, },
@@ -36,6 +37,7 @@ const childRoutes: Routes = [
   //Si deseamos usar enlaces sin parámetros debemos ubicarlos antes de los que usan parámetros
   { path:'estudiantes/asignacion', canActivate: [AdminGuard] ,component: AsignacionesComponent, data: { titulo: 'Asignación de estudiantes' } },
   { path:'estudiantes/asignacion/:id', canActivate: [AdminGuard] ,component: AsignacionComponent, data: { titulo: 'Administración de asignación de estudiantes' } },
+  { path:'estudiantes/imc/:id', canActivate: [AdminGuard] ,component: ImcComponent, data: { titulo: 'Registro de IMC' } },
   { path:'estudiantes/perfil', component: PerfilEstudiantilComponent, data: { titulo: 'Datos de perfil estudiantil' } },
   { path:'estudiantes/:id', component: EstudianteComponent, data: { titulo: 'Administración de datos de estudiantes' } },
 

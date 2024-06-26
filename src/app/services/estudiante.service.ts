@@ -112,6 +112,12 @@ export class EstudianteService {
     return this.http.put(url, { curso: idCurso, matricula: idMatricula} , this.headers );
   }
 
+  registroEstudianteImc( estudiante: string, periodo: string, peso: number, talla: number, fecha_toma: string)
+  {
+    const url = `${ base_url}/estudiantes/imc/${estudiante}`;
+    return this.http.put(url, { periodo, peso, talla, fecha_toma } , this.headers );
+  }
+
   eliminarCliente( _id: string )
   {
     const url = `${ base_url}/clientes/${_id}`;

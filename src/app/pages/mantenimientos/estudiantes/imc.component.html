@@ -1,0 +1,173 @@
+<div id="top-perfil" class="row">
+    <div class="col-lg-12">
+        <div class="card ">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Asignación de estudiante a curso</h4>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal p-t-20" 
+                      [formGroup]="registroImcForm"
+                      (submit)="guardarRegistro()">
+
+                    <div class="form-body">
+                        <h3 class="box-title">Información personal</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Cédula</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="cedula">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Asignado a</label>
+                                    <div class="col-md-9">
+                                        <p *ngIf="datosAsignacion" class="form-control-static"> 
+                                            {{datosAsignacion.grado}} {{datosAsignacion.nivel}} {{datosAsignacion.paralelo}} {{datosAsignacion.especialidad}}
+                                            <span *ngIf="datosAsignacion.jornada=='VESPERTINA'" class="label label-danger">{{datosAsignacion.jornada}}</span>
+                                            <span *ngIf="datosAsignacion.jornada=='MATUTINA'" class="label label-info">{{datosAsignacion.jornada}}</span>
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Apellidos</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="apellidos">
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Nombres</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="nombres">
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Sexo</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control custom-select"
+                                                formControlName="sexo"
+                                                data-placeholder="--seleccione--">
+                                            <option value="">--seleccione--</option>
+                                            <option value="1">Hombre</option>
+                                            <option value="0">Mujer</option>
+                                        </select>
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Fecha de nacimiento</label>
+                                    <div class="col-md-9">
+                                        <input  type="date" 
+                                                class="form-control" 
+                                                placeholder="dd/mm/yyyy"
+                                                formControlName="f_nac">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title">Datos del IMC</h3>
+                        <h4 class="box-title"></h4>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Periodo</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" 
+                                                formControlName="periodo">
+                                            <option selected value="0">Seleccione el periodo...</option>
+                                            <option value="01-2024">01-2024</option>
+                                            <option value="02-2024">02-2024</option>
+                                            <option value="03-2024">03-2024</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Fecha de toma</label>
+                                    <div class="col-md-9">
+                                        <input  type="date" 
+                                                class="form-control" 
+                                                placeholder="dd/mm/yyyy"
+                                                formControlName="fecha_toma">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Peso en kilogramos</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="peso">
+                                        <small class="form-control-feedback"> Si conoce en libras multiplique por 2.20462 </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Altura en metros</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="talla">
+                                        <small class="form-control-feedback"> Si conoce en centímetros divida para 100 </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" 
+                                                class="btn btn-success mr-1"
+                                                [disabled]="registroImcForm.invalid">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

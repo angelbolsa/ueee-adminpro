@@ -23,6 +23,7 @@ import { PerfilEstudiantilComponent } from './mantenimientos/estudiantes/perfil-
 import { AsignacionesComponent } from './mantenimientos/estudiantes/asignaciones.component';
 import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
 import { OfertaComponent } from './mantenimientos/cursos/oferta.component';
+import { ImcComponent } from './mantenimientos/estudiantes/imc.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { OfertaComponent } from './mantenimientos/cursos/oferta.component';
     CursosComponent,
     DashboardComponent,
     EstudianteComponent,
+    ImcComponent,
     ListadosComponent,
     OfertaComponent,
     PagesComponent,
