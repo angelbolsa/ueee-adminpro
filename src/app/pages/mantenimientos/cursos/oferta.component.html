@@ -58,20 +58,23 @@
                     <table class="table color-table table-hover info-table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Grado</th>
-                                <th>Paralelo</th>
-                                <th>Especialidad</th>
-                                <th>Estudiantes</th>
+                                <th class="text-center">#</th>
+                                <th class="text-center">Grado</th>
+                                <th class="text-center">Paralelo</th>
+                                <th class="text-center">Estudiantes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let oferta of ofertaActivaMatutina; index as i">
-                                <td>{{i+1}}</td>
-                                <td>{{oferta.result.grado_abrev}} {{oferta.result.nivel_abrev}}</td>
-                                <td>{{oferta.result.paralelo}}</td>
-                                <td>{{oferta.result.especialidad}}</td>
-                                <td><span class="label label-info">{{oferta.estudiantes}}</span></td>
+                                <td class="text-center">{{i+1}}</td>
+                                <td>{{oferta.result.grado_abrev}} {{oferta.result.nivel_abrev}}
+                                    <small>
+                                        <span *ngIf="oferta.result.especialidad=='INFORMATICA'" class="label label-primary label-rounded">{{oferta.result.especialidad}}</span>
+                                        <span *ngIf="oferta.result.especialidad=='CONTABILIDAD'" class="label label-success label-rounded">{{oferta.result.especialidad}}</span>
+                                    </small>
+                                </td>
+                                <td class="text-center">{{oferta.result.paralelo}}</td>
+                                <td class="text-center"><span class="label label-info">{{oferta.estudiantes}}</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,21 +90,24 @@
                     <div class="table responsive">
                         <table class="table color-table table-hover danger-table">
                             <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Grado</th>
-                                    <th>Paralelo</th>
-                                    <th>Especialidad</th>
-                                    <th>Estudiantes</th>
+                                <tr class="text-center">
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Grado</th>
+                                    <th class="text-center">Paralelo</th>
+                                    <th class="text-center">Estudiantes</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let oferta of ofertaActivaVespertina; index as i">
-                                    <td>{{i+1}}</td>
-                                    <td>{{oferta.result.grado_abrev}} {{oferta.result.nivel_abrev}}</td>
-                                    <td>{{oferta.result.paralelo}}</td>
-                                    <td>{{oferta.result.especialidad}}</td>
-                                    <td><span class="label label-danger">{{oferta.estudiantes}}</span></td>
+                                    <td class="text-center">{{i+1}}</td>
+                                    <td>{{oferta.result.grado_abrev}} {{oferta.result.nivel_abrev}} 
+                                        <small>
+                                            <span *ngIf="oferta.result.especialidad=='INFORMATICA'" class="label label-primary label-rounded">{{oferta.result.especialidad}}</span>
+                                            <span *ngIf="oferta.result.especialidad=='CONTABILIDAD'" class="label label-success label-rounded">{{oferta.result.especialidad}}</span>
+                                        </small>
+                                    </td>
+                                    <td class="text-center">{{oferta.result.paralelo}}</td>
+                                    <td class="text-center"><span class="label label-danger">{{oferta.estudiantes}}</span></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -8,6 +8,7 @@ import { formatDate } from '@angular/common';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
 import Swal from 'sweetalert2';
 import { EstudianteService } from '../../../services/estudiante.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-estudiante',
@@ -20,6 +21,7 @@ export class EstudianteComponent implements OnInit {
 
   public estudianteForm: FormGroup;
   public estudianteSeleccionado: Estudiante;
+  public usuarioModificacion: string;
 
   public imgSubs: Subscription;
 
@@ -92,10 +94,12 @@ export class EstudianteComponent implements OnInit {
                   alergia, alergia_detalle, embarazo, embarazo_fecha, 
                   representante_cedula, representante_nombre_completo, representante_celular, representante_email,
                   madre_cedula, madre_nombre_completo, madre_celular, madre_email,
-                  padre_cedula, padre_nombre_completo, padre_celular, padre_email
+                  padre_cedula, padre_nombre_completo, padre_celular, padre_email, usuario
                   
            } = estudiante;
           const fecha_nacimiento: string = formatDate(f_nac,'yyyy-MM-dd','EN');
+
+          this.usuarioModificacion = usuario.nombre;
           
           if(embarazo_fecha){
             var fecha_embarazo: string = formatDate(embarazo_fecha,'yyyy-MM-dd','EN');
